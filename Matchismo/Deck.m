@@ -35,6 +35,7 @@
     [self addCard:card atTop:NO];
 }
 
+// TODO: check why need to check for count before
 - (Card*) drawRandomCard
 {
     Card* random_card = nil;
