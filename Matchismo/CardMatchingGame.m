@@ -17,6 +17,12 @@
 
 @implementation CardMatchingGame
 
+- (NSMutableArray*) cards
+{
+    if (!_cards) _cards = [[NSMutableArray alloc] init];
+    return _cards;
+}
+
 - (instancetype) initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck
 {
     self = [super init];
@@ -54,15 +60,19 @@ static const int COST_TO_CHOOSE = 1;
         return;
     }
     
+    self.score -= COST_TO_CHOOSE;
+
     if (card.isChosen) {
         card.chosen = NO;
         return;
     }
 
-    self.score -= COST_TO_CHOOSE;
-        
+    card.chosen = YES;
+    card.matched = NO;
+    
     for (Card* otherCard in self.cards) {
-        if (otherCard.isChosen && !otherCard.isMatched) {
+        if (otherCard.isChosen && !otherCard.isMatched &&
+            otherCard != card) {
             int matchScore = [card match:@[otherCard]];
             if (matchScore) {
                 self.score += matchScore * MATCH_BONUS;
