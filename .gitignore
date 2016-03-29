@@ -1,0 +1,6 @@
+
+# xcode user data
+Matchismo.xcodeproj/xcuserdata/**
+
+# gvim files
+*.swp
