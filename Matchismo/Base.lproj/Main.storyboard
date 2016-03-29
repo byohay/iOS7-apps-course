@@ -137,6 +137,22 @@
                                     <action selector="touchCardButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="at5-9t-DH6"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eja-aK-QHU">
+                                <rect key="frame" x="20" y="594" width="316" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HP-B1-Xyz">
+                                <rect key="frame" x="149" y="510" width="59" height="44"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Reset">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchResetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Qw-O9-Vit"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -144,6 +160,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="scoreLabel" destination="eja-aK-QHU" id="sxI-Ne-cgJ"/>
                         <outletCollection property="cardButtons" destination="29A-jE-A88" id="BWe-gK-cAT"/>
                         <outletCollection property="cardButtons" destination="cD1-iz-7XA" id="ouL-nd-gN2"/>
                         <outletCollection property="cardButtons" destination="6gt-O2-yOa" id="7pG-7a-yKf"/>
@@ -160,7 +177,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="349" y="480"/>
+            <point key="canvasLocation" x="348.5" y="479.5"/>
         </scene>
     </scenes>
     <resources>

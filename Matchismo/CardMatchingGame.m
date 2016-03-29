@@ -26,11 +26,13 @@
 - (instancetype) initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck
 {
     self = [super init];
+    self.cards = [[NSMutableArray alloc] init];
     
     if (self)
     {
         for (int i = 0; i < count; ++i)
         {
+            
             Card* card =  [deck drawRandomCard];
             
             if (card) {
@@ -60,12 +62,12 @@ static const int COST_TO_CHOOSE = 1;
         return;
     }
     
-    self.score -= COST_TO_CHOOSE;
 
     if (card.isChosen) {
         card.chosen = NO;
         return;
     }
+    self.score -= COST_TO_CHOOSE;
 
     card.chosen = YES;
     card.matched = NO;
@@ -74,7 +76,8 @@ static const int COST_TO_CHOOSE = 1;
         if (otherCard.isChosen && !otherCard.isMatched &&
             otherCard != card) {
             int matchScore = [card match:@[otherCard]];
-            if (matchScore) {
+            
+            if (matchScore > 0) {
                 self.score += matchScore * MATCH_BONUS;
                 card.matched = YES;
                 otherCard.matched = YES;
