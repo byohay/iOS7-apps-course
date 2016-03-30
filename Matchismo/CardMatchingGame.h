@@ -20,6 +20,10 @@
 
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic) NSUInteger matchingCardsNumber;
+@property (nonatomic, readonly) NSInteger lastScore;
+@property (nonatomic, readonly) BOOL isMatchingOccured;
+@property (nonatomic, readonly, strong) NSMutableArray* cardsToDisplay;
+
 
 @end
 

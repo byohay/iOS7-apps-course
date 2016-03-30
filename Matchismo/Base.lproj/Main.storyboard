@@ -159,6 +159,12 @@
                                     <action selector="touchResetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Qw-O9-Vit"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6b-sL-Qqh">
+                                <rect key="frame" x="20" y="472" width="316" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -166,6 +172,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="lastConsiderationLabel" destination="H6b-sL-Qqh" id="4eN-fh-Trq"/>
                         <outlet property="matchingCardsSwitch" destination="GRW-7M-BLJ" id="fGD-Ss-xJt"/>
                         <outlet property="scoreLabel" destination="eja-aK-QHU" id="sxI-Ne-cgJ"/>
                         <outletCollection property="cardButtons" destination="29A-jE-A88" id="BWe-gK-cAT"/>

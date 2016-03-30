@@ -18,6 +18,7 @@
 @property (strong, nonatomic) CardMatchingGame* game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *matchingCardsSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *lastConsiderationLabel;
 
 @end
 
@@ -82,6 +83,29 @@
         cardButton.enabled = !card.isMatched;
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", @(self.game.score)];
+    
+    [self updateLastConsideration];
+}
+
+- (void) updateLastConsideration
+{
+    NSString* matchedCardsString = @"";
+    
+    for (Card* card in self.game.cardsToDisplay) {
+        matchedCardsString = [matchedCardsString stringByAppendingFormat: @"%@ ", card.contents];
+    }
+    
+    if (self.game.isMatchingOccured) {
+        if (self.game.lastScore > 0) {
+            self.lastConsiderationLabel.text = [NSString stringWithFormat: @"Matched %@ for %@ points.", matchedCardsString, @(self.game.lastScore)];
+        }
+        else {
+            self.lastConsiderationLabel.text = [NSString stringWithFormat: @"%@ don't match! %@ points penalty!", matchedCardsString, @(self.game.lastScore)];
+        }
+    }
+    else {
+        self.lastConsiderationLabel.text = matchedCardsString;
+    }
 }
 
 - (NSString*) titleForCard:(Card*) card
