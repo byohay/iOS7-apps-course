@@ -19,6 +19,10 @@
 
 - (int) match: (NSArray*) otherCards
 {
+    if (![otherCards count]) {
+        return 0;
+    }
+    
     int score = 0;
     for (PlayingCard* otherCard in otherCards) {
         if ([self.suit isEqualToString:otherCard.suit]) {
@@ -28,6 +32,9 @@
             score += 4;
         }
     }
+    
+    score += [[otherCards objectAtIndex:0] match:[otherCards
+                                                  subarrayWithRange:NSMakeRange(1, [otherCards count]-1)]];
     
     return score;
 }
