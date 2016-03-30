@@ -92,11 +92,27 @@ static const int COST_TO_CHOOSE = 1;
     self.score += self.lastScore;
 }
 
+- (void) setCorrectCardsToDisplay:(NSMutableArray *)otherCardsToMatch card:(Card *)card
+{
+    [self.cardsToDisplay removeAllObjects];
+    
+    if (self.isMatchingOccured) {
+        self.cardsToDisplay = [otherCardsToMatch mutableCopy];
+        [self.cardsToDisplay insertObject:card atIndex:0];
+    }
+    else {
+        for (Card* otherCard in self.cards) {
+            if (otherCard.isChosen && !otherCard.isMatched) {
+                [self.cardsToDisplay addObject:otherCard];
+            }
+        }
+    }
+}
+
 - (void) chooseCardAtIndex:(NSUInteger)index
 {
     Card* card = [self cardAtIndex:index];
-    self.isMatchingOccured = NO;
-    
+
     if (card.isMatched) {
         return;
     }
@@ -109,24 +125,23 @@ static const int COST_TO_CHOOSE = 1;
         }
     }
 
-    self.cardsToDisplay = [otherCardsToMatch mutableCopy];
+    self.isMatchingOccured = [otherCardsToMatch count] + 1 == self.matchingCardsNumber;
 
     if (card.isChosen) {
         card.chosen = NO;
-        return;
     }
-    
-    self.score -= COST_TO_CHOOSE;
+    else {
+        self.score -= COST_TO_CHOOSE;
 
-    card.chosen = YES;
-    card.matched = NO;
-    
-    [self.cardsToDisplay insertObject:card atIndex:0];
-    
-    if ([otherCardsToMatch count] + 1 == self.matchingCardsNumber) {
-        self.isMatchingOccured = YES;
-        [self matchOtherCardsWithCard:otherCardsToMatch card:card];
+        card.chosen = YES;
+        card.matched = NO;
+        
+        if (self.isMatchingOccured) {
+            [self matchOtherCardsWithCard:otherCardsToMatch card:card];
+        }
     }
+    
+    [self setCorrectCardsToDisplay:otherCardsToMatch card:card];
 }
 
 - (Card*) cardAtIndex:(NSUInteger)index
