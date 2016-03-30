@@ -21,6 +21,13 @@
 
 @implementation CardMatchingGame
 
+
+static const int MATCH_BONUS = 4;
+static const int MISMATCH_PENALTY = 2;
+static const int COST_TO_CHOOSE = 1;
+
+
+
 - (NSMutableArray*) cards
 {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
@@ -34,6 +41,24 @@
 }
 
 
+- (BOOL)getCardsFromDeck:(Deck *)deck count:(NSUInteger)count
+{
+    for (int i = 0; i < count; ++i)
+    {
+        
+        Card* card =  [deck drawRandomCard];
+        
+        if (card) {
+            [self.cards addObject:card];
+        }
+        else {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
 - (instancetype) initWithCardCount:(NSUInteger)count
                          usingDeck:(Deck *)deck
              numberOfMatchingCards:(NSUInteger) matchingCardsNumber;
@@ -43,19 +68,8 @@
     
     if (self)
     {
-        for (int i = 0; i < count; ++i)
-        {
-            
-            Card* card =  [deck drawRandomCard];
-            
-            if (card) {
-                [self.cards addObject:card];
-            }
-            else {
-                self = nil;
-                break;
-            }
-            
+        if (![self getCardsFromDeck:deck count:count]) {
+            self = nil;
         }
             
     }
@@ -64,10 +78,6 @@
     
     return self;
 }
-
-static const int MATCH_BONUS = 4;
-static const int MISMATCH_PENALTY = 2;
-static const int COST_TO_CHOOSE = 1;
 
 - (void)matchOtherCardsWithCard:(NSMutableArray *)otherCardsToMatch card:(Card *)card
 {
@@ -109,6 +119,20 @@ static const int COST_TO_CHOOSE = 1;
     }
 }
 
+- (NSMutableArray *)getOtherCardsToMatch:(Card*) card
+{
+    NSMutableArray* otherCardsToMatch = [[NSMutableArray alloc] init];
+    
+    for (Card* otherCard in self.cards) {
+        if (otherCard.isChosen && !otherCard.isMatched &&
+            otherCard != card) {
+            [otherCardsToMatch addObject:otherCard];
+        }
+    }
+    
+    return otherCardsToMatch;
+}
+
 - (void) chooseCardAtIndex:(NSUInteger)index
 {
     Card* card = [self cardAtIndex:index];
@@ -117,13 +141,7 @@ static const int COST_TO_CHOOSE = 1;
         return;
     }
 
-    NSMutableArray* otherCardsToMatch = [[NSMutableArray alloc] init];
-    for (Card* otherCard in self.cards) {
-        if (otherCard.isChosen && !otherCard.isMatched &&
-            otherCard != card) {
-            [otherCardsToMatch addObject:otherCard];
-        }
-    }
+    NSMutableArray* otherCardsToMatch = [self getOtherCardsToMatch:card];
 
     self.isMatchingOccured = [otherCardsToMatch count] + 1 == self.matchingCardsNumber;
 
