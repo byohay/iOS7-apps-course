@@ -22,5 +22,16 @@
     return 2;
 }
 
+- (NSString*) titleForCard:(Card*) card
+{
+    return card.isChosen ? card.contents : @"";
+}
+
+- (UIImage*) imageForCard:(Card*) card
+{
+    return [UIImage imageNamed: card.isChosen ? @"cardfront" : @"cardback"];
+}
+
+
 
 @end

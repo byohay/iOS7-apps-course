@@ -94,16 +94,6 @@
     }
 }
 
-- (NSString*) titleForCard:(Card*) card
-{
-    return card.isChosen ? card.contents : @"";
-}
-
-- (UIImage*) imageForCard:(Card*) card
-{
-    return [UIImage imageNamed: card.isChosen ? @"cardfront" : @"cardback"];
-}
-
 - (Deck*)deck
 {
     if (!_deck) _deck = [self createDeck];
