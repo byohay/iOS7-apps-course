@@ -16,7 +16,6 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) CardMatchingGame* game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *matchingCardsSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *lastConsiderationLabel;
 
 @end
@@ -34,7 +33,6 @@
 
 - (IBAction)touchResetButton:(UIButton*)sender {
     self.game = [self createGame];
-    self.matchingCardsSwitch.enabled = YES;
     [self updateUI];
 }
 
@@ -50,21 +48,10 @@
     self.game.matchingCardsNumber = [self getMatchingMode];
 }
 
-- (NSUInteger) getMatchingMode
-{
-    if ([self.matchingCardsSwitch isOn]) {
-        return 3;
-    }
-    else {
-        return 2;
-    }
-}
-
 - (IBAction)touchCardButton:(UIButton *)sender {
     NSUInteger cardIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:cardIndex];
     [self updateUI];
-    self.matchingCardsSwitch.enabled = NO;
 }
 
 - (void) updateUI

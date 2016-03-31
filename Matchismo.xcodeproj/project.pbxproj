@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		B973539E1CAD2251004A8196 /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B973539D1CAD2251004A8196 /* SetViewController.m */; };
 		B97353A71CAD28F1004A8196 /* SetCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = B97353A61CAD28F1004A8196 /* SetCardDeck.m */; };
-		B97353AA1CAD297A004A8196 /* SetCard.m in Sources */ = {isa = PBXBuildFile; fileRef = B97353A91CAD297A004A8196 /* SetCard.m */; };
 		B97353AD1CAD47B8004A8196 /* MatchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B97353AC1CAD47B8004A8196 /* MatchingViewController.m */; };
+		B97353B01CAD50DD004A8196 /* SetCard.m in Sources */ = {isa = PBXBuildFile; fileRef = B97353AF1CAD50DD004A8196 /* SetCard.m */; };
 		B99CD8F11CA957E3002AECF6 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = B99CD8F01CA957E3002AECF6 /* Deck.m */; };
 		B9AF4FCE1CA952F800699492 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AF4FCD1CA952F800699492 /* Card.m */; };
 		B9B58BAF1CA99108002EE923 /* CardMatchingGame.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B58BAA1CA99108002EE923 /* CardMatchingGame.m */; };
@@ -48,10 +48,10 @@
 		B973539D1CAD2251004A8196 /* SetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetViewController.m; path = Matchismo/SetViewController.m; sourceTree = "<group>"; };
 		B97353A51CAD28F1004A8196 /* SetCardDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetCardDeck.h; path = Matchismo/SetCardDeck.h; sourceTree = "<group>"; };
 		B97353A61CAD28F1004A8196 /* SetCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetCardDeck.m; path = Matchismo/SetCardDeck.m; sourceTree = "<group>"; };
-		B97353A81CAD297A004A8196 /* SetCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCard.h; sourceTree = "<group>"; };
-		B97353A91CAD297A004A8196 /* SetCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCard.m; sourceTree = "<group>"; };
 		B97353AB1CAD47B8004A8196 /* MatchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchingViewController.h; path = Matchismo/MatchingViewController.h; sourceTree = "<group>"; };
 		B97353AC1CAD47B8004A8196 /* MatchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchingViewController.m; path = Matchismo/MatchingViewController.m; sourceTree = "<group>"; };
+		B97353AE1CAD50DD004A8196 /* SetCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetCard.h; path = Matchismo/SetCard.h; sourceTree = "<group>"; };
+		B97353AF1CAD50DD004A8196 /* SetCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetCard.m; path = Matchismo/SetCard.m; sourceTree = "<group>"; };
 		B99CD8EF1CA957E3002AECF6 /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Deck.h; path = Matchismo/Deck.h; sourceTree = "<group>"; };
 		B99CD8F01CA957E3002AECF6 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Deck.m; path = Matchismo/Deck.m; sourceTree = "<group>"; };
 		B9AF4FCC1CA952F800699492 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Card.h; path = Matchismo/Card.h; sourceTree = "<group>"; };
@@ -108,14 +108,14 @@
 		B9EB662E1CA93FF4002AC233 = {
 			isa = PBXGroup;
 			children = (
+				B97353AE1CAD50DD004A8196 /* SetCard.h */,
+				B97353AF1CAD50DD004A8196 /* SetCard.m */,
 				B97353AB1CAD47B8004A8196 /* MatchingViewController.h */,
 				B97353AC1CAD47B8004A8196 /* MatchingViewController.m */,
 				B97353A51CAD28F1004A8196 /* SetCardDeck.h */,
 				B97353A61CAD28F1004A8196 /* SetCardDeck.m */,
 				B973539C1CAD2251004A8196 /* SetViewController.h */,
 				B973539D1CAD2251004A8196 /* SetViewController.m */,
-				B97353A81CAD297A004A8196 /* SetCard.h */,
-				B97353A91CAD297A004A8196 /* SetCard.m */,
 				B9B58BA91CA99108002EE923 /* CardMatchingGame.h */,
 				B9B58BAA1CA99108002EE923 /* CardMatchingGame.m */,
 				B9B58BAB1CA99108002EE923 /* PlayingCard.h */,
@@ -317,7 +317,7 @@
 			files = (
 				B99CD8F11CA957E3002AECF6 /* Deck.m in Sources */,
 				B9EB66421CA93FF4002AC233 /* CardGameViewController.m in Sources */,
-				B97353AA1CAD297A004A8196 /* SetCard.m in Sources */,
+				B97353B01CAD50DD004A8196 /* SetCard.m in Sources */,
 				B973539E1CAD2251004A8196 /* SetViewController.m in Sources */,
 				B97353A71CAD28F1004A8196 /* SetCardDeck.m in Sources */,
 				B9B58BAF1CA99108002EE923 /* CardMatchingGame.m in Sources */,
