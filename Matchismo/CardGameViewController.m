@@ -6,12 +6,11 @@
 //  Copyright © 2016 Lightricks. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "CardGameViewController.h"
 #import "Deck.h"
-#import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
 
-@interface ViewController ()
+@interface CardGameViewController ()
 
 @property (strong, nonatomic) Deck* deck;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
@@ -23,7 +22,7 @@
 @end
 
 
-@implementation ViewController
+@implementation CardGameViewController
 
 
 - (CardMatchingGame*)game
@@ -124,10 +123,6 @@
     return _deck;
 }
 
-- (Deck*) createDeck
-{
-    return [[PlayingCardDeck alloc] init];
-}
 
 
 @end

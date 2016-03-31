@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Deck.h"
 
-@interface ViewController : UIViewController
+@interface CardGameViewController : UIViewController
 
+
+- (Deck*) createDeck; // abstract
+- (NSUInteger) getMatchingMode; // abstract
 
 @end
 
