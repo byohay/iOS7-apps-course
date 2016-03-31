@@ -42,12 +42,12 @@
 
 + (NSArray*) validColors
 {
-    return @[@"red", @"green", @"purple"];
+    return @[@"red", @"green", @"blue"];
 }
 
 + (NSArray*) validShading
 {
-    return @[@"solid", @"striped", @"open"];
+    return @[@"solid", @"transparent", @"open"];
 }
 
 
