@@ -79,23 +79,40 @@
 
 - (void) updateLastConsideration
 {
-    NSString* matchedCardsString = @"";
+    NSMutableAttributedString* matchedCardsString = [[NSMutableAttributedString alloc] initWithString:@""];
     
     for (Card* card in self.game.cardsToDisplay) {
-        matchedCardsString = [matchedCardsString stringByAppendingFormat: @"%@ ", card.contents];
+        [matchedCardsString appendAttributedString:[self historyTitleForCard:card]];
     }
     
     if (self.game.isMatchingOccured) {
-        if (self.game.lastScore > 0) {
-            self.lastConsiderationLabel.text = [NSString stringWithFormat: @"Matched %@ for %@ points.", matchedCardsString, @(self.game.lastScore)];
-        }
-        else {
-            self.lastConsiderationLabel.text = [NSString stringWithFormat: @"%@ don't match! %@ points penalty!", matchedCardsString, @(self.game.lastScore)];
-        }
+        self.lastConsiderationLabel.attributedText = [self getTextInCaseOfMatch:matchedCardsString];
     }
     else {
-        self.lastConsiderationLabel.text = matchedCardsString;
+        self.lastConsiderationLabel.attributedText = matchedCardsString;
     }
+}
+
+- (NSAttributedString*) getTextInCaseOfMatch:(NSMutableAttributedString*) matchedCardsString
+{
+    NSMutableAttributedString* text;
+    NSString* textToAdd;
+    
+    if (self.game.lastScore > 0) {
+        text = [[NSMutableAttributedString alloc] initWithString:@"Matched "];
+        [text appendAttributedString:matchedCardsString];
+        
+        textToAdd = [[NSString alloc] initWithFormat:@" for %@ points.", @(self.game.lastScore)];
+    }
+    else {
+        text = matchedCardsString;
+        
+        textToAdd = [ [NSString alloc] initWithFormat:@" don't match! %@ points penalty!", @(self.game.lastScore)];
+        
+    }
+    [text appendAttributedString:[[NSAttributedString alloc] initWithString:textToAdd]];
+    
+    return text;
 }
 
 - (Deck*)deck

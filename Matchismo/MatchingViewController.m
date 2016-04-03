@@ -32,6 +32,10 @@
     return [UIImage imageNamed: card.isChosen ? @"cardfront" : @"cardback"];
 }
 
+- (NSAttributedString*) historyTitleForCard:(Card*) card
+{
+    return [[NSAttributedString alloc] initWithString: card.contents];
+}
 
 
 @end

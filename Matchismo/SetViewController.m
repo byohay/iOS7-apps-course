@@ -82,5 +82,10 @@
     return [UIImage imageNamed: card.isChosen ? @"bluebackground" : @"cardfront"];
 }
 
+- (NSAttributedString*) historyTitleForCard:(Card*) card
+{
+    return [self titleForCard:card];
+}
+
 @end
 

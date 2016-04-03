@@ -16,6 +16,7 @@
 - (NSUInteger) getMatchingMode; // abstract
 - (NSAttributedString*) titleForCard:(Card*) card; // abstract
 - (UIImage*) imageForCard:(Card*) card;  // abstract
+- (NSAttributedString*) historyTitleForCard:(Card*) card; // abstract
 
 @end
 
