@@ -25,14 +25,9 @@
     return 1;
 }
 
-+ (NSArray*) validNumbers
++ (int) maxNumberOfSymbols
 {
-    NSMutableArray* numbers;
-    
-    for (int number =1; number < 3; ++number) {
-        [numbers addObject:[[NSNumber alloc] initWithInt:number]];
-    }
-    return numbers;
+    return 3;
 }
 
 + (NSArray*) validShapes
