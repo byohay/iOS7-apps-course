@@ -26,6 +26,7 @@
     return 3;
 }
 
+
 - (NSAttributedString*) titleForCard:(Card*) card
 {
     NSMutableAttributedString* title = [[NSMutableAttributedString alloc] init];
@@ -77,7 +78,7 @@
 
 - (UIImage*) imageForCard:(Card*) card
 {
-    return [UIImage imageNamed: card.isChosen ? @"cardfront" : @"cardback"];
+    return [UIImage imageNamed: card.isChosen ? @"bluebackground" : @"cardfront"];
 }
 
 @end

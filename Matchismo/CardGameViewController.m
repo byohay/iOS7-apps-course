@@ -23,6 +23,10 @@
 
 @implementation CardGameViewController
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [self updateUI];
+}
 
 - (CardMatchingGame*)game
 {
