@@ -9,6 +9,7 @@
 #import "CardGameViewController.h"
 #import "Deck.h"
 #import "CardMatchingGame.h"
+#import "HistoryViewController.h"
 
 @interface CardGameViewController ()
 
@@ -16,7 +17,8 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) CardMatchingGame* game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UILabel *lastConsiderationLabel;
+@property (strong, nonatomic) NSMutableArray* history;
+@property (strong, nonatomic) NSAttributedString* lastConsiderationLabel;
 
 @end
 
@@ -25,18 +27,47 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self updateUI];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Show History"]) {
+        if ([segue.destinationViewController isKindOfClass:[HistoryViewController class]]) {
+            HistoryViewController* historyController = (HistoryViewController*)segue.destinationViewController;
+            
+            historyController.history = self.history;
+        }
+    }
 }
 
 - (CardMatchingGame*)game
 {
-    if (!_game) _game = self.game = [self createGame];
+    if (!_game) _game = [self createGame];
     
     return _game;
 }
 
+- (NSMutableArray*)history
+{
+    if (!_history) _history = [self createHistory];
+    
+    return _history;
+}
+
+- (Deck*)deck
+{
+    if (!_deck) _deck = [self createDeck];
+    return _deck;
+}
+
+
+
+
 - (IBAction)touchResetButton:(UIButton*)sender {
     self.game = [self createGame];
+    self.history = [self createHistory];
     [self updateUI];
 }
 
@@ -47,15 +78,24 @@
                                  numberOfMatchingCards:[self getMatchingMode]];
 }
 
+- (NSMutableArray*) createHistory
+{
+    return [[NSMutableArray alloc] init];
+}
+
+
 - (IBAction)matchingModeSwitch:(UISwitch*)sender
 {
     self.game.matchingCardsNumber = [self getMatchingMode];
 }
 
+// history is added only here. If it were inside updateUI, it would have changed every time
+// we return to this view. This is why it is added here.
 - (IBAction)touchCardButton:(UIButton *)sender {
     NSUInteger cardIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:cardIndex];
     [self updateUI];
+    [self.history addObject:self.lastConsiderationLabel];
 }
 
 - (void) updateUI
@@ -86,10 +126,10 @@
     }
     
     if (self.game.isMatchingOccured) {
-        self.lastConsiderationLabel.attributedText = [self getTextInCaseOfMatch:matchedCardsString];
+        self.lastConsiderationLabel = [self getTextInCaseOfMatch:matchedCardsString];
     }
     else {
-        self.lastConsiderationLabel.attributedText = matchedCardsString;
+        self.lastConsiderationLabel = matchedCardsString;
     }
 }
 
@@ -113,12 +153,6 @@
     [text appendAttributedString:[[NSAttributedString alloc] initWithString:textToAdd]];
     
     return text;
-}
-
-- (Deck*)deck
-{
-    if (!_deck) _deck = [self createDeck];
-    return _deck;
 }
 
 
