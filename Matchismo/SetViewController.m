@@ -12,7 +12,6 @@
 
 @interface SetViewController()
 
-@property (strong, nonatomic) NSDictionary* cardColorToUIColor;
 @end
 
 @implementation SetViewController
@@ -39,7 +38,7 @@
     NSString* color = setCard.color;
     
     if ([setCard.shading isEqualToString:@"transparent"]) {
-        [title addAttributes: @{ NSForegroundColorAttributeName: [self getCardColorToUIColor:color],
+        [title addAttributes: @{ NSForegroundColorAttributeName: [self getCardColorToUIColor:color withTransparency:0.1],
                                  NSStrokeWidthAttributeName: @-5,
                                  NSStrokeColorAttributeName: [UIColor blackColor]}
                        range:NSMakeRange(0, [title length])];
@@ -58,15 +57,23 @@
     return title;
 }
 
-- (UIColor*) getCardColorToUIColor:(NSString*) stringColor{
-    NSDictionary *cardColorToUIColor = @{
-                                         @"red" : [[UIColor alloc] initWithRed:1 green:0 blue:0 alpha:1],
-                                         @"green" : [[UIColor alloc] initWithRed:0 green:1 blue:0 alpha:1],
-                                         @"blue" : [[UIColor alloc] initWithRed:0 green:0 blue:1 alpha:1]
+
+- (UIColor*) getCardColorToUIColor:(NSString*) stringColor
+                   withTransparency:(float)transparency{
+    NSDictionary* cardColorToUIColor = @{
+                                         @"red" : [[UIColor alloc] initWithRed:1 green:0 blue:0 alpha:transparency],
+                                         @"green" : [[UIColor alloc] initWithRed:0 green:1 blue:0 alpha:transparency],
+                                         @"blue" : [[UIColor alloc] initWithRed:0 green:0 blue:1 alpha:transparency]
                                 };
     
     return cardColorToUIColor[stringColor];
 }
+
+- (UIColor*) getCardColorToUIColor:(NSString*) stringColor{
+    
+    return [self getCardColorToUIColor:stringColor withTransparency:1];
+}
+
 
 - (UIImage*) imageForCard:(Card*) card
 {
