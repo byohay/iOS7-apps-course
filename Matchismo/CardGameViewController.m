@@ -61,7 +61,7 @@
         
         Card* card = [self.game cardAtIndex:cardIndex];
         
-        [cardButton setTitle:[self titleForCard:card]
+        [cardButton setAttributedTitle:[self titleForCard:card]
                     forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[self imageForCard:card]
                     forState:UIControlStateNormal];

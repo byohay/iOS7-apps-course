@@ -27,17 +27,14 @@
     return 3;
 }
 
-- (NSString*) titleForCard:(Card*) card
+- (NSAttributedString*) titleForCard:(Card*) card
 {
-    NSMutableAttributedString* title;
+    NSMutableAttributedString* title = [[NSMutableAttributedString alloc] init];
     SetCard* setCard = (SetCard*) card;
     
     for (int i = 1; i <= (int)setCard.number_of_symbols; ++i) {
         [title appendAttributedString:[[NSAttributedString alloc] initWithString:setCard.shape]];
     }
-    
-    NSLog(@"lol %@", setCard.shading);
-    
     
     NSString* color = setCard.color;
     
@@ -58,7 +55,7 @@
                        range:NSMakeRange(0, [title length])];
     }
     
-    return [title string];
+    return title;
 }
 
 - (UIColor*) getCardColorToUIColor:(NSString*) stringColor{

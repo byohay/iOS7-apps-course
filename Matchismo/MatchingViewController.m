@@ -22,9 +22,9 @@
     return 2;
 }
 
-- (NSString*) titleForCard:(Card*) card
+- (NSAttributedString*) titleForCard:(Card*) card
 {
-    return card.isChosen ? card.contents : @"";
+    return [[NSAttributedString alloc] initWithString: (card.isChosen ? card.contents : @"")];
 }
 
 - (UIImage*) imageForCard:(Card*) card

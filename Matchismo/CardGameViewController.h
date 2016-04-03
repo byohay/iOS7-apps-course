@@ -14,7 +14,7 @@
 
 - (Deck*) createDeck; // abstract
 - (NSUInteger) getMatchingMode; // abstract
-- (NSString*) titleForCard:(Card*) card; // abstract
+- (NSAttributedString*) titleForCard:(Card*) card; // abstract
 - (UIImage*) imageForCard:(Card*) card;  // abstract
 
 @end
