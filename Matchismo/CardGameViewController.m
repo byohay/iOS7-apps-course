@@ -123,6 +123,7 @@
     
     for (Card* card in self.game.cardsToDisplay) {
         [matchedCardsString appendAttributedString:[self historyTitleForCard:card]];
+        [matchedCardsString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\t"]];
     }
     
     if (self.game.isMatchingOccured) {
