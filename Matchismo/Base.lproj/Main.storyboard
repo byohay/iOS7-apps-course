@@ -5,11 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Card Matching-->
         <scene sceneID="hCy-4S-Bi2">
             <objects>
                 <navigationController id="O1I-uK-tlv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="fiQ-gg-nzk"/>
+                    <tabBarItem key="tabBarItem" title="Card Matching" id="fiQ-gg-nzk"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8GR-2K-7UB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -22,11 +22,11 @@
             </objects>
             <point key="canvasLocation" x="-881" y="-331"/>
         </scene>
-        <!--Item-->
+        <!--Set-->
         <scene sceneID="KeE-5C-gLd">
             <objects>
                 <navigationController id="4WS-CH-49S" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="eIj-bJ-oXc"/>
+                    <tabBarItem key="tabBarItem" title="Set" id="eIj-bJ-oXc"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uMr-5y-Tnk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
