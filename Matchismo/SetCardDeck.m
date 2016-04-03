@@ -21,7 +21,7 @@
                 for(NSString* color in [SetCard validColors]) {
                     for(NSString* shading in [SetCard validShading]) {
                         SetCard* card = [[SetCard alloc] init];
-                        card.number_of_symbols = i;
+                        card.numberOfSymbols = i;
                         card.shape = shape;
                         card.color = color;
                         card.shading = shading;

@@ -51,7 +51,7 @@
         isMatched = NO;
     }
     
-    else if (![self isFeatureQualifiedForSet:@[[@(self.number_of_symbols) stringValue], [@(secondCard.number_of_symbols) stringValue], [@(thirdCard.number_of_symbols) stringValue]]]) {
+    else if (![self isFeatureQualifiedForSet:@[[@(self.numberOfSymbols) stringValue], [@(secondCard.numberOfSymbols) stringValue], [@(thirdCard.numberOfSymbols) stringValue]]]) {
         isMatched = NO;
     }
     

@@ -44,7 +44,7 @@
     NSMutableAttributedString* title = [[NSMutableAttributedString alloc] initWithString:@""];
     SetCard* setCard = (SetCard*) card;
     
-    for (int i = 1; i <= (int)setCard.number_of_symbols; ++i) {
+    for (int i = 1; i <= (int)setCard.numberOfSymbols; ++i) {
         [title appendAttributedString:[[NSAttributedString alloc] initWithString:setCard.shape]];
     }
     
