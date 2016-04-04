@@ -108,19 +108,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B9EB662E1CA93FF4002AC233 = {
+		B9B8DC9F1CB299DF00D038A1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				B9B8DC991CB156D500D038A1 /* HistoryViewController.h */,
 				B9B8DC9A1CB156D500D038A1 /* HistoryViewController.m */,
-				B97353AE1CAD50DD004A8196 /* SetCard.h */,
-				B97353AF1CAD50DD004A8196 /* SetCard.m */,
 				B97353AB1CAD47B8004A8196 /* MatchingViewController.h */,
 				B97353AC1CAD47B8004A8196 /* MatchingViewController.m */,
-				B97353A51CAD28F1004A8196 /* SetCardDeck.h */,
-				B97353A61CAD28F1004A8196 /* SetCardDeck.m */,
 				B973539C1CAD2251004A8196 /* SetViewController.h */,
 				B973539D1CAD2251004A8196 /* SetViewController.m */,
+				B9EB66401CA93FF4002AC233 /* CardGameViewController.h */,
+				B9EB66411CA93FF4002AC233 /* CardGameViewController.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		B9EB662E1CA93FF4002AC233 = {
+			isa = PBXGroup;
+			children = (
+				B9B8DC9F1CB299DF00D038A1 /* UI */,
+				B97353AE1CAD50DD004A8196 /* SetCard.h */,
+				B97353AF1CAD50DD004A8196 /* SetCard.m */,
+				B97353A51CAD28F1004A8196 /* SetCardDeck.h */,
+				B97353A61CAD28F1004A8196 /* SetCardDeck.m */,
 				B9B58BA91CA99108002EE923 /* CardMatchingGame.h */,
 				B9B58BAA1CA99108002EE923 /* CardMatchingGame.m */,
 				B9B58BAB1CA99108002EE923 /* PlayingCard.h */,
@@ -131,8 +141,6 @@
 				B9AF4FCD1CA952F800699492 /* Card.m */,
 				B99CD8EF1CA957E3002AECF6 /* Deck.h */,
 				B99CD8F01CA957E3002AECF6 /* Deck.m */,
-				B9EB66401CA93FF4002AC233 /* CardGameViewController.h */,
-				B9EB66411CA93FF4002AC233 /* CardGameViewController.m */,
 				B9EB66391CA93FF4002AC233 /* Matchismo */,
 				B9EB66531CA93FF4002AC233 /* MatchismoTests */,
 				B9EB665E1CA93FF4002AC233 /* MatchismoUITests */,
