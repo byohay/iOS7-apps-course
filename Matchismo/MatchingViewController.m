@@ -8,7 +8,13 @@
 
 #import "MatchingViewController.h"
 #import "PlayingCardDeck.h"
+#import "PlayingCardView.h"
 
+@interface MatchingViewController()
+
+@property (weak, nonatomic) IBOutlet PlayingCardView *playingCardView;
+
+@end
 
 @implementation MatchingViewController
 
@@ -35,6 +41,15 @@
 - (NSAttributedString*) historyTitleForCard:(Card*) card
 {
     return [[NSAttributedString alloc] initWithString: card.contents];
+}
+
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.playingCardView.rank = 12;
+    self.playingCardView.suit = @"♦︎";
+    self.playingCardView.faceUp = YES;
 }
 
 

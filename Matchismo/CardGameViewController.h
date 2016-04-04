@@ -19,4 +19,3 @@
 - (NSAttributedString*) historyTitleForCard:(Card*) card; // abstract
 
 @end
-
