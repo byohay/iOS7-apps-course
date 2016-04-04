@@ -58,20 +58,37 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
-#pragma mark Drawing
+#pragma mark Initialization
 
-#define CORNER_RADIUS 12.0
-#define CORNER_FONT_STANDARD_HEIGHT 180.0
+#pragma mark -
 
-- (CGFloat) cornerScaleFactor { return self.bounds.size.height / CORNER_FONT_STANDARD_HEIGHT; }
-- (CGFloat) cornerRadius { return CORNER_RADIUS * [self cornerScaleFactor]; }
-- (CGFloat)cornerOffset { return [self cornerRadius] / 3.0; }
+- (void) setup
+{
+    self.backgroundColor = nil;
+    self.opaque = NO;
+    self.contentMode = UIViewContentModeRedraw;
+}
+
+- (void) awakeFromNib
+{
+    [self setup];
+}
+
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    [self setup];
+    return self;
+}
+
 
 #pragma mark -
 
 #pragma mark UIView
 
 #pragma mark -
+
 
 - (void) drawRect:(CGRect)rect
 {
@@ -86,21 +103,41 @@ NS_ASSUME_NONNULL_BEGIN
     [roundedRect stroke];
     
     if (self.faceUp) {
-        NSLog(@"%@%@", [self rankAsString], self.suit);
-        UIImage *faceImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@", [self rankAsString], self.suit]];
-        if (faceImage) {
-            CGRect imageRect = CGRectInset(self.bounds,
-                                           self.bounds.size.width * (1.0-self.faceCardScaleFactor),
-                                           self.bounds.size.height * (1.0-self.faceCardScaleFactor));
-            [faceImage drawInRect:imageRect];
-        } else {
-            [self drawPips];
-        }
-        
-        [self drawCorners];
+        [self drawFaceUpCard];
     } else {
         [[UIImage imageNamed:@"cardback"] drawInRect:self.bounds];
     }
+}
+
+#pragma mark -
+
+#pragma mark - Drawing
+
+#pragma mark -
+
+#define CORNER_RADIUS 12.0
+#define CORNER_FONT_STANDARD_HEIGHT 180.0
+
+- (CGFloat) cornerScaleFactor { return self.bounds.size.height / CORNER_FONT_STANDARD_HEIGHT; }
+- (CGFloat) cornerRadius { return CORNER_RADIUS * [self cornerScaleFactor]; }
+- (CGFloat)cornerOffset { return [self cornerRadius] / 3.0; }
+
+
+- (void)drawFaceUpCard
+{
+    UIImage *faceImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@", [self rankAsString], self.suit]];
+    
+    if (faceImage) {
+        CGRect imageRect = CGRectInset(self.bounds,
+                                       self.bounds.size.width * (1.0-self.faceCardScaleFactor),
+                                       self.bounds.size.height * (1.0-self.faceCardScaleFactor));
+        [faceImage drawInRect:imageRect];
+    }
+    else {
+        [self drawPips];
+    }
+    
+    [self drawCorners];
 }
 
 - (void)pushContextAndRotateUpsideDown
@@ -218,31 +255,6 @@ NS_ASSUME_NONNULL_BEGIN
                             verticalOffset:voffset
                                 upsideDown:YES];
     }
-}
-
-
-#pragma mark -
-
-#pragma mark Initialization
-
-- (void) setup
-{
-    self.backgroundColor = nil;
-    self.opaque = NO;
-    self.contentMode = UIViewContentModeRedraw;
-}
-
-- (void) awakeFromNib
-{
-    [self setup];
-}
-
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    [self setup];
-    return self;
 }
 
 #pragma mark -
