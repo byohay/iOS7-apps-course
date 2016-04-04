@@ -14,7 +14,7 @@
 @interface CardGameViewController ()
 
 @property (strong, nonatomic) Deck* deck;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *cardViews;
 @property (strong, nonatomic) CardMatchingGame* game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) NSMutableArray* history;
@@ -73,7 +73,7 @@
 
 - (CardMatchingGame*) createGame
 {
-    return [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+    return [[CardMatchingGame alloc] initWithCardCount:[self.cardViews count]
                                              usingDeck:[self createDeck]
                                  numberOfMatchingCards:[self getMatchingMode]];
 }
@@ -92,7 +92,7 @@
 // history is added only here. If it were inside updateUI, it would have changed every time
 // we return to this view. This is why it is added here.
 - (IBAction)touchCardButton:(UIButton *)sender {
-    NSUInteger cardIndex = [self.cardButtons indexOfObject:sender];
+    NSUInteger cardIndex = [self.cardViews indexOfObject:sender];
     [self.game chooseCardAtIndex:cardIndex];
     [self updateUI];
     [self.history addObject:self.lastConsiderationLabel];
@@ -100,17 +100,12 @@
 
 - (void) updateUI
 {
-    for (UIButton* cardButton in self.cardButtons) {
-        NSUInteger cardIndex = [self.cardButtons indexOfObject:cardButton];
+    for (UIView* cardView in self.cardViews) {
+        NSUInteger cardIndex = [self.cardViews indexOfObject:cardView];
         
         Card* card = [self.game cardAtIndex:cardIndex];
-        
-        [cardButton setAttributedTitle:[self titleForCard:card]
-                    forState:UIControlStateNormal];
-        [cardButton setBackgroundImage:[self imageForCard:card]
-                    forState:UIControlStateNormal];
-        
-        cardButton.enabled = !card.isMatched;
+        [self updatedCardView:cardView withCard:card];
+        [cardView setNeedsDisplay];
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", @(self.game.score)];
     

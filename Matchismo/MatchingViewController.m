@@ -9,10 +9,9 @@
 #import "MatchingViewController.h"
 #import "PlayingCardDeck.h"
 #import "PlayingCardView.h"
+#import "PlayingCard.h"
 
 @interface MatchingViewController()
-
-@property (weak, nonatomic) IBOutlet PlayingCardView *playingCardView;
 
 @end
 
@@ -28,29 +27,19 @@
     return 2;
 }
 
-- (NSAttributedString*) titleForCard:(Card*) card
-{
-    return [[NSAttributedString alloc] initWithString: (card.isChosen ? card.contents : @"")];
-}
-
-- (UIImage*) imageForCard:(Card*) card
-{
-    return [UIImage imageNamed: card.isChosen ? @"cardfront" : @"cardback"];
-}
-
 - (NSAttributedString*) historyTitleForCard:(Card*) card
 {
     return [[NSAttributedString alloc] initWithString: card.contents];
 }
 
-- (void) viewDidLoad
+- (void) updatedCardView:(UIView *) cardView withCard:(Card *)card
 {
-    [super viewDidLoad];
+    PlayingCard *playingCard = (PlayingCard *)card;
+    PlayingCardView* playingCardView = (PlayingCardView *)cardView;
     
-    self.playingCardView.rank = 12;
-    self.playingCardView.suit = @"♦︎";
-    self.playingCardView.faceUp = YES;
+    playingCardView.suit = playingCard.suit;
+    playingCardView.rank = playingCard.rank;
+    playingCardView.faceUp = playingCard.isChosen;
 }
-
 
 @end
