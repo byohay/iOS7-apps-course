@@ -2,6 +2,7 @@
 // Created by Ben Yohay.
 
 #import "PlayingCardView.h"
+#import "CardViewConfiguration.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -78,6 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+
     [self setup];
     return self;
 }
@@ -92,7 +94,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void) drawRect:(CGRect)rect
 {
-    UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:[self cornerRadius]];
+  UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:
+                               [CardViewConfiguration cornerRadius:self.bounds.size.height]];
     
     [roundedRect addClip];
     
@@ -114,14 +117,6 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Drawing
 
 #pragma mark -
-
-#define CORNER_RADIUS 12.0
-#define CORNER_FONT_STANDARD_HEIGHT 180.0
-
-- (CGFloat) cornerScaleFactor { return self.bounds.size.height / CORNER_FONT_STANDARD_HEIGHT; }
-- (CGFloat) cornerRadius { return CORNER_RADIUS * [self cornerScaleFactor]; }
-- (CGFloat)cornerOffset { return [self cornerRadius] / 3.0; }
-
 
 - (void)drawFaceUpCard
 {
@@ -165,12 +160,15 @@ NS_ASSUME_NONNULL_BEGIN
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
     UIFont *cornerFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    cornerFont = [cornerFont fontWithSize:cornerFont.pointSize * [self cornerScaleFactor]];
+    cornerFont = [cornerFont fontWithSize:cornerFont.pointSize *
+                 [CardViewConfiguration cornerScaleFactor:self.bounds.size.height]];
     
     NSAttributedString *cornerText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n%@", [self rankAsString], self.suit] attributes:@{ NSFontAttributeName : cornerFont, NSParagraphStyleAttributeName : paragraphStyle }];
     
     CGRect textBounds;
-    textBounds.origin = CGPointMake([self cornerOffset], [self cornerOffset]);
+    textBounds.origin = CGPointMake([CardViewConfiguration cornerOffset:self.bounds.size.height],
+                                    [CardViewConfiguration cornerOffset:self.bounds.size.height]);
+
     textBounds.size = [cornerText size];
     [cornerText drawInRect:textBounds];
     
