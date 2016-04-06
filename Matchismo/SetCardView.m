@@ -65,18 +65,18 @@ NS_ASSUME_NONNULL_BEGIN
     [[UIColor blackColor] setStroke];
     [roundedRect stroke];
 
-    if ([self.shape isEqual: @"squiggle"]) {
-      [self drawSquiggle:self.bounds.size.height / 2];
-    }
-    else if ([self.shape isEqual: @"diamond"]) {
-      [self drawDiamond:self.bounds.size.height / 2];
-    }
-    else if ([self.shape isEqual:@"roundedRect"]) {
-      [self drawRoundedRect:self.bounds.size.height / 2];
-    }
-      else {
-        [[UIImage imageNamed:@"cardback"] drawInRect:self.bounds];
-    }
+  if (self.numberOfSymbols == 1) {
+    [self drawRightShapeAtHeight:self.bounds.size.height / 2];
+  }
+  else if (self.numberOfSymbols == 2) {
+    [self drawRightShapeAtHeight:self.bounds.size.height / 3];
+    [self drawRightShapeAtHeight:self.bounds.size.height / 3 * 2];
+  }
+  else {
+    [self drawRightShapeAtHeight:self.bounds.size.height / 4];
+    [self drawRightShapeAtHeight:self.bounds.size.height / 2];
+    [self drawRightShapeAtHeight:self.bounds.size.height / 4 * 3];
+  }
 }
 
 #pragma mark -
