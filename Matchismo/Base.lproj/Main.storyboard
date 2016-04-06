@@ -289,7 +289,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fs5-DM-4sb" customClass="SetCardView">
-                                <rect key="frame" x="20" y="72" width="335" height="425"/>
+                                <rect key="frame" x="20" y="72" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNk-zN-GNR" customClass="SetCardView">
@@ -320,10 +320,6 @@
                                 <rect key="frame" x="275" y="397" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bj2-Wh-2sh" customClass="SetCardView">
-                                <rect key="frame" x="148" y="397" width="80" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jep-ct-hBt" customClass="SetCardView">
                                 <rect key="frame" x="20" y="397" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -342,6 +338,10 @@
                                     <action selector="touchResetButton:" destination="4DW-0c-BLH" eventType="touchUpInside" id="E91-GI-ovX"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bj2-Wh-2sh" customClass="SetCardView">
+                                <rect key="frame" x="148" y="397" width="80" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="0.87389547413793101" colorSpace="calibratedRGB"/>
                     </view>
@@ -363,6 +363,18 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="scoreLabel" destination="yNy-nM-NE9" id="DzM-Jg-vEj"/>
+                        <outletCollection property="cardViews" destination="nwc-Wx-Lia" id="0rr-ZK-asU"/>
+                        <outletCollection property="cardViews" destination="Ee6-69-2hn" id="Hlw-hK-g6c"/>
+                        <outletCollection property="cardViews" destination="fs5-DM-4sb" id="bh8-7o-dBn"/>
+                        <outletCollection property="cardViews" destination="HNk-zN-GNR" id="ysd-T9-xb3"/>
+                        <outletCollection property="cardViews" destination="jAn-qs-DAX" id="uLn-oN-rGv"/>
+                        <outletCollection property="cardViews" destination="O6t-bc-4bV" id="hFh-kK-qfv"/>
+                        <outletCollection property="cardViews" destination="Wno-A6-1QU" id="Dfx-VQ-CE5"/>
+                        <outletCollection property="cardViews" destination="oig-zY-vpM" id="gVp-uf-SUY"/>
+                        <outletCollection property="cardViews" destination="ER6-OU-jr1" id="UwO-0v-ycG"/>
+                        <outletCollection property="cardViews" destination="TgW-g8-VsS" id="Cs3-mN-OIE"/>
+                        <outletCollection property="cardViews" destination="bj2-Wh-2sh" id="rGU-L4-Enz"/>
+                        <outletCollection property="cardViews" destination="Jep-ct-hBt" id="gpi-L9-WpH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aeg-aC-p3Q" sceneMemberID="firstResponder"/>
