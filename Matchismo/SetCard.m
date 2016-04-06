@@ -17,15 +17,15 @@
 
 - (BOOL) isFeatureQualifiedForSet: (NSArray*) cardsFeatures
 {
-    NSString* firstCardFeature = cardsFeatures[0];
-    NSString* secondCardFeature = cardsFeatures[1];
-    NSString* thirdCardFeature = cardsFeatures[2];
+    NSNumber* firstCardFeature = cardsFeatures[0];
+    NSNumber* secondCardFeature = cardsFeatures[1];
+    NSNumber* thirdCardFeature = cardsFeatures[2];
     
-    if ( ([firstCardFeature isEqualToString:secondCardFeature] &&
-         [firstCardFeature isEqualToString:thirdCardFeature]) ||
-        (![firstCardFeature isEqualToString:secondCardFeature] &&
-         ![firstCardFeature isEqualToString:thirdCardFeature] &&
-         ![secondCardFeature isEqualToString:thirdCardFeature])) {
+    if ( ([firstCardFeature isEqualToNumber:secondCardFeature] &&
+         [firstCardFeature isEqualToNumber:thirdCardFeature]) ||
+        (![firstCardFeature isEqualToNumber:secondCardFeature] &&
+         ![firstCardFeature isEqualToNumber:thirdCardFeature] &&
+         ![secondCardFeature isEqualToNumber:thirdCardFeature])) {
             return YES;
         }
     return NO;
@@ -41,20 +41,32 @@
     SetCard* secondCard = otherCards[0];
     SetCard* thirdCard = otherCards[1];
     
-    if (![self isFeatureQualifiedForSet:@[self.shape, secondCard.shape, thirdCard.shape]]) {
+  if (![self isFeatureQualifiedForSet:
+  @[[NSNumber numberWithInteger:self.shape],
+    [NSNumber numberWithInteger:secondCard.shape],
+    [NSNumber numberWithInteger:thirdCard.shape]]]) {
         isMatched = NO;
     }
-    else if (![self isFeatureQualifiedForSet:@[self.color, secondCard.color, thirdCard.color]]) {
+    else if (![self isFeatureQualifiedForSet:
+               @[[NSNumber numberWithInteger:self.color],
+                 [NSNumber numberWithInteger:secondCard.color],
+                 [NSNumber numberWithInteger:thirdCard.color]]]) {
         isMatched = NO;
     }
-    else if (![self isFeatureQualifiedForSet:@[self.shading, secondCard.shading, thirdCard.shading]]) {
+    else if (![self isFeatureQualifiedForSet:
+               @[[NSNumber numberWithInteger:self.shading],
+                 [NSNumber numberWithInteger:secondCard.shading],
+                 [NSNumber numberWithInteger:thirdCard.shading]]]) {
         isMatched = NO;
     }
     
-    else if (![self isFeatureQualifiedForSet:@[[@(self.numberOfSymbols) stringValue], [@(secondCard.numberOfSymbols) stringValue], [@(thirdCard.numberOfSymbols) stringValue]]]) {
-        isMatched = NO;
+    else if (![self isFeatureQualifiedForSet:
+               @[[NSNumber numberWithInteger:self.numberOfSymbols],
+                 [NSNumber numberWithInteger:secondCard.numberOfSymbols],
+                 [NSNumber numberWithInteger:thirdCard.numberOfSymbols]]]) {
+      isMatched = NO;
     }
-    
+
     return isMatched ? 1 : 0;
 }
 
@@ -65,17 +77,17 @@
 
 + (NSArray*) validShapes
 {
-    return @[@"▲", @"●", @"■"];
+    return @[@1, @2, @3];
 }
 
 + (NSArray*) validColors
 {
-    return @[@"red", @"green", @"blue"];
+  return @[@1, @2, @3];
 }
 
 + (NSArray*) validShading
 {
-    return @[@"solid", @"transparent", @"open"];
+  return @[@1, @2, @3];
 }
 
 

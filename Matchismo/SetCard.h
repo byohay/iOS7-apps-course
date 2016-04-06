@@ -11,9 +11,9 @@
 @interface SetCard : Card
 
 @property (nonatomic) int numberOfSymbols;
-@property (strong, nonatomic) NSString* shape;
-@property (strong, nonatomic) NSString* color;
-@property (strong, nonatomic) NSString* shading;
+@property (nonatomic) int shape;
+@property (nonatomic) int color;
+@property (nonatomic) int shading;
 
 + (int) maxNumberOfSymbols;
 + (NSArray*) validShapes;
