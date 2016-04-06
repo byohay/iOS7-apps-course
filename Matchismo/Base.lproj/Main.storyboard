@@ -269,7 +269,6 @@
         <!--Item-->
         <scene sceneID="5fG-HX-deR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Aeg-aC-p3Q" sceneMemberID="firstResponder"/>
                 <viewController id="4DW-0c-BLH" customClass="SetViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ELL-Ov-kCn"/>
@@ -285,51 +284,51 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nwc-Wx-Lia" customClass="PlayingCardView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nwc-Wx-Lia" customClass="SetCardView">
                                 <rect key="frame" x="275" y="72" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fs5-DM-4sb" customClass="PlayingCardView">
-                                <rect key="frame" x="20" y="72" width="80" height="100"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fs5-DM-4sb" customClass="SetCardView">
+                                <rect key="frame" x="20" y="72" width="335" height="425"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNk-zN-GNR" customClass="PlayingCardView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNk-zN-GNR" customClass="SetCardView">
                                 <rect key="frame" x="275" y="180" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jAn-qs-DAX" customClass="PlayingCardView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jAn-qs-DAX" customClass="SetCardView">
                                 <rect key="frame" x="147" y="180" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O6t-bc-4bV" customClass="PlayingCardView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O6t-bc-4bV" customClass="SetCardView">
                                 <rect key="frame" x="20" y="180" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wno-A6-1QU" customClass="PlayingCardView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wno-A6-1QU" customClass="SetCardView">
                                 <rect key="frame" x="275" y="288" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oig-zY-vpM" customClass="PlayingCardView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oig-zY-vpM" customClass="SetCardView">
                                 <rect key="frame" x="148" y="288" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ER6-OU-jr1" customClass="PlayingCardView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ER6-OU-jr1" customClass="SetCardView">
                                 <rect key="frame" x="20" y="288" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgW-g8-VsS" customClass="PlayingCardView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgW-g8-VsS" customClass="SetCardView">
                                 <rect key="frame" x="275" y="397" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bj2-Wh-2sh" customClass="PlayingCardView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bj2-Wh-2sh" customClass="SetCardView">
                                 <rect key="frame" x="148" y="397" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jep-ct-hBt" customClass="PlayingCardView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jep-ct-hBt" customClass="SetCardView">
                                 <rect key="frame" x="20" y="397" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ee6-69-2hn" customClass="PlayingCardView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ee6-69-2hn" customClass="SetCardView">
                                 <rect key="frame" x="148" y="72" width="80" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -366,6 +365,7 @@
                         <outlet property="scoreLabel" destination="yNy-nM-NE9" id="DzM-Jg-vEj"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aeg-aC-p3Q" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-372.5" y="730.5"/>
         </scene>
