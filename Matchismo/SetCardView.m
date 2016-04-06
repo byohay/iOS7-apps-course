@@ -6,11 +6,28 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface SetCardView()
+
+@property (strong, nonatomic) NSDictionary* stringToUIColor;
+
+@end
+
 @implementation SetCardView
 
 #pragma mark -
 
 #pragma mark Properties
+
+- (NSDictionary*) stringToUIColor
+{
+  if(!_stringToUIColor) _stringToUIColor = @{
+                                             @"red" : [[UIColor alloc] initWithRed:1 green:0 blue:0 alpha:1],
+                                             @"green" : [[UIColor alloc] initWithRed:0 green:1 blue:0 alpha:1],
+                                             @"blue" : [[UIColor alloc] initWithRed:0 green:0 blue:1 alpha:1]
+                                             };
+
+  return _stringToUIColor;
+}
 
 #pragma mark -
 
@@ -77,6 +94,29 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
+#pragma mark - Drawing By Features
+
+- (void) drawRightShapeAtHeight:(CGFloat) height
+{
+  if ([self.shape isEqual: @"squiggle"]) {
+    [self drawSquiggle:height];
+  }
+  else if ([self.shape isEqual: @"diamond"]) {
+    [self drawDiamond:height];
+  }
+  else if ([self.shape isEqual:@"roundedRect"]) {
+    [self drawRoundedRect:height];
+  }
+}
+
+- (UIColor*) getStringToUIColor
+{
+  return self.stringToUIColor[self.color];
+}
+
+
+#pragma mark -
+
 #pragma mark - Drawing
 
 #pragma mark -
@@ -102,6 +142,10 @@ NS_ASSUME_NONNULL_BEGIN
 
   [bezierPath stroke];
 }
+
+#define STROKE_WIDTH_PICTURE_RELATION 2500
+- (CGFloat) strokeWidth { return self.bounds.size.height * self.bounds.size.width
+    / STROKE_WIDTH_PICTURE_RELATION; }
 
 #pragma mark -
 
@@ -158,7 +202,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) drawSquiggle:(CGFloat)height
 {
   UIBezierPath* bezierPath = [UIBezierPath bezierPath];
-  [[UIColor blackColor] setStroke];
+  bezierPath.lineWidth = [self strokeWidth];
+  [[self getStringToUIColor] setStroke];
 
   CGFloat originHeight = height - [self shapeHeight] / 2;
 
@@ -182,7 +227,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) drawDiamond:(CGFloat)height
 {
   UIBezierPath* bezierPath = [UIBezierPath bezierPath];
-  [[UIColor blackColor] setStroke];
+  bezierPath.lineWidth = [self strokeWidth];
+  [[self getStringToUIColor] setStroke];
 
   CGPoint origin = CGPointMake([self shapeLeftmostX], height);
 
@@ -214,6 +260,9 @@ NS_ASSUME_NONNULL_BEGIN
 
   UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:shapeRect cornerRadius:
                               SHAPE_CORNER_RADIUS];
+  bezierPath.lineWidth = [self strokeWidth];
+  [[self getStringToUIColor] setStroke];
+
   [[UIColor blackColor] setStroke];
 
   [bezierPath stroke];
