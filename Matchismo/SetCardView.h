@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) int numberOfSymbols;
 @property (strong, nonatomic) NSString* shape;
-@property (strong, nonatomic) NSString* color;
+@property (strong, nonatomic) UIColor* color;
 @property (strong, nonatomic) NSString* shading;
 
 @end

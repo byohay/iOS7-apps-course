@@ -18,17 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark Properties
 
-- (NSDictionary*) stringToUIColor
-{
-  if(!_stringToUIColor) _stringToUIColor = @{
-                                             @"red" : [[UIColor alloc] initWithRed:1 green:0 blue:0 alpha:1],
-                                             @"green" : [[UIColor alloc] initWithRed:0 green:1 blue:0 alpha:1],
-                                             @"blue" : [[UIColor alloc] initWithRed:0 green:0 blue:1 alpha:1]
-                                             };
-
-  return _stringToUIColor;
-}
-
 #pragma mark -
 
 #pragma mark Initialization
@@ -76,8 +65,6 @@ NS_ASSUME_NONNULL_BEGIN
     [[UIColor blackColor] setStroke];
     [roundedRect stroke];
 
-  self.shape = @"diamond";
-
     if ([self.shape isEqual: @"squiggle"]) {
       [self drawSquiggle:self.bounds.size.height / 2];
     }
@@ -108,12 +95,6 @@ NS_ASSUME_NONNULL_BEGIN
     [self drawRoundedRect:height];
   }
 }
-
-- (UIColor*) getStringToUIColor
-{
-  return self.stringToUIColor[self.color];
-}
-
 
 #pragma mark -
 
@@ -203,7 +184,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
   UIBezierPath* bezierPath = [UIBezierPath bezierPath];
   bezierPath.lineWidth = [self strokeWidth];
-  [[self getStringToUIColor] setStroke];
+  [self.color setStroke];
 
   CGFloat originHeight = height - [self shapeHeight] / 2;
 
@@ -228,7 +209,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
   UIBezierPath* bezierPath = [UIBezierPath bezierPath];
   bezierPath.lineWidth = [self strokeWidth];
-  [[self getStringToUIColor] setStroke];
+  [self.color setStroke];
 
   CGPoint origin = CGPointMake([self shapeLeftmostX], height);
 
@@ -261,7 +242,7 @@ NS_ASSUME_NONNULL_BEGIN
   UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:shapeRect cornerRadius:
                               SHAPE_CORNER_RADIUS];
   bezierPath.lineWidth = [self strokeWidth];
-  [[self getStringToUIColor] setStroke];
+  [self.color setStroke];
 
   [[UIColor blackColor] setStroke];
 
