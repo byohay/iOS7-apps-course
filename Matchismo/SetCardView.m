@@ -61,11 +61,42 @@ NS_ASSUME_NONNULL_BEGIN
 
   self.shape = @"diamond";
 
-    if ([self.shape isEqual: @"diamond"]) {
-      [self drawSquiggle:self.bounds.size.height/2];
-    } else {
+    if ([self.shape isEqual: @"squiggle"]) {
+      [self drawSquiggle:self.bounds.size.height / 2];
+    }
+    else if ([self.shape isEqual: @"diamond"]) {
+        [self drawDiamond:self.bounds.size.height / 2];
+    }
+      else {
         [[UIImage imageNamed:@"cardback"] drawInRect:self.bounds];
     }
+}
+
+#pragma mark -
+
+#pragma mark - Drawing
+
+#pragma mark -
+
+#define DISTANCE_FROM_CORNER_FACTOR 0.2
+#define HEIGHT_SIZE_REVERSE_FACTOR 10
+
+- (CGFloat) shapeHeight { return self.bounds.size.height / HEIGHT_SIZE_REVERSE_FACTOR; }
+- (CGFloat) shapeLeftmostX { return self.bounds.size.width * DISTANCE_FROM_CORNER_FACTOR; }
+
+- (void)drawShapeUpsideDown:(UIBezierPath *)bezierPath withOrigin:(CGPoint)origin
+                secondPoint:(CGPoint)secondPoint withYMove:(CGFloat)YMove
+{
+  CGAffineTransform mirror = CGAffineTransformMakeRotation(M_PI);
+  CGAffineTransform translate = CGAffineTransformMakeTranslation(self.bounds.size.width, self.bounds.size.height);
+  CGAffineTransform moveToPlace = CGAffineTransformMakeTranslation(-secondPoint.x + 4 * origin.x,
+                                                                   YMove);
+
+  [bezierPath applyTransform:mirror];
+  [bezierPath applyTransform:translate];
+  [bezierPath applyTransform:moveToPlace];
+
+  [bezierPath stroke];
 }
 
 #pragma mark -
@@ -73,12 +104,6 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Drawing Squiggles
 
 #pragma mark -
-
-#define DISTANCE_FROM_CORNER_FACTOR 0.2
-#define HEIGHT_SIZE_REVERSE_FACTOR 10
-
-
-- (CGFloat) shapeHeight { return self.bounds.size.height / HEIGHT_SIZE_REVERSE_FACTOR; }
 
 
 #define CONTROL_POINTS_RELATION_FACTOR 2
@@ -126,24 +151,6 @@ NS_ASSUME_NONNULL_BEGIN
                 controlPoint2: CGPointMake(point.x + amplitude, secondPointHeight)];
 }
 
-- (void)drawShapeUpsideDown:(UIBezierPath *)bezierPath withOrigin:(CGPoint)origin
-                secondPoint:(CGPoint)secondPoint
-{
-  CGFloat mirrorYMove = origin.y + [self shapeHeight] -
-  origin.y * (self.bounds.size.height / origin.y - 1);
-  
-  CGAffineTransform mirror = CGAffineTransformMakeRotation(M_PI);
-  CGAffineTransform translate = CGAffineTransformMakeTranslation(self.bounds.size.width, self.bounds.size.height);
-  CGAffineTransform moveToPlace = CGAffineTransformMakeTranslation(-secondPoint.x + 4 * origin.x,
-                                                                   mirrorYMove);
-  
-  [bezierPath applyTransform:mirror];
-  [bezierPath applyTransform:translate];
-  [bezierPath applyTransform:moveToPlace];
-  
-  [bezierPath stroke];
-}
-
 - (void) drawSquiggle:(CGFloat)height
 {
   UIBezierPath* bezierPath = [UIBezierPath bezierPath];
@@ -151,16 +158,43 @@ NS_ASSUME_NONNULL_BEGIN
 
   CGFloat originHeight = height - [self shapeHeight] / 2;
 
-  CGPoint origin = CGPointMake(self.bounds.size.width * DISTANCE_FROM_CORNER_FACTOR,
-                               originHeight);
+  CGPoint origin = CGPointMake([self shapeLeftmostX], originHeight);
 
   CGPoint secondPoint = [self drawLongCurve:bezierPath startingAt:origin];
   [self drawShortCurve:bezierPath startingAt:secondPoint];
   [bezierPath stroke];
 
+  CGFloat YMove = origin.y + [self shapeHeight] -
+  origin.y * (self.bounds.size.height / origin.y - 1);
+
   [self drawShapeUpsideDown:bezierPath withOrigin:origin
-                secondPoint:secondPoint];
+                secondPoint:secondPoint withYMove:YMove];
 }
+
+#pragma mark -
+
+#pragma mark - Drawing Diamonds
+
+- (void) drawDiamond:(CGFloat)height
+{
+  UIBezierPath* bezierPath = [UIBezierPath bezierPath];
+  [[UIColor blackColor] setStroke];
+
+  CGPoint origin = CGPointMake([self shapeLeftmostX], height);
+
+  [bezierPath moveToPoint: origin];
+  [bezierPath addLineToPoint:CGPointMake(self.bounds.size.width / 2,
+                                         origin.y - [self shapeHeight] / 2)];
+  [bezierPath addLineToPoint:CGPointMake(self.bounds.size.width - origin.x, origin.y)];
+
+  [bezierPath stroke];
+
+  CGPoint lastPoint = CGPointMake(self.bounds.size.width - origin.x, origin.y);
+
+  [self drawShapeUpsideDown:bezierPath withOrigin:origin
+                secondPoint:lastPoint withYMove:0];
+}
+
 
 #pragma mark -
 
