@@ -65,7 +65,10 @@ NS_ASSUME_NONNULL_BEGIN
       [self drawSquiggle:self.bounds.size.height / 2];
     }
     else if ([self.shape isEqual: @"diamond"]) {
-        [self drawDiamond:self.bounds.size.height / 2];
+      [self drawDiamond:self.bounds.size.height / 2];
+    }
+    else if ([self.shape isEqual:@"roundedRect"]) {
+      [self drawRoundedRect:self.bounds.size.height / 2];
     }
       else {
         [[UIImage imageNamed:@"cardback"] drawInRect:self.bounds];
@@ -83,6 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CGFloat) shapeHeight { return self.bounds.size.height / HEIGHT_SIZE_REVERSE_FACTOR; }
 - (CGFloat) shapeLeftmostX { return self.bounds.size.width * DISTANCE_FROM_CORNER_FACTOR; }
+- (CGFloat) shapeWidth { return self.bounds.size.width * (1 - DISTANCE_FROM_CORNER_FACTOR * 2); }
 
 - (void)drawShapeUpsideDown:(UIBezierPath *)bezierPath withOrigin:(CGPoint)origin
                 secondPoint:(CGPoint)secondPoint withYMove:(CGFloat)YMove
@@ -197,6 +201,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 #pragma mark -
+
+#pragma mark - Drawing Rounded Rect
+
+#define SHAPE_CORNER_RADIUS 20
+
+- (void) drawRoundedRect:(CGFloat)height
+{
+  CGRect shapeRect;
+  shapeRect.origin = CGPointMake([self shapeLeftmostX], height - [self shapeHeight] / 2);
+  shapeRect.size = CGSizeMake([self shapeWidth], [self shapeHeight]);
+
+  UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:shapeRect cornerRadius:
+                              SHAPE_CORNER_RADIUS];
+  [[UIColor blackColor] setStroke];
+
+  [bezierPath stroke];
+}
 
 @end
 
