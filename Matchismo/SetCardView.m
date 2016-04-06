@@ -244,8 +244,6 @@ NS_ASSUME_NONNULL_BEGIN
   bezierPath.lineWidth = [self strokeWidth];
   [self.color setStroke];
 
-  [[UIColor blackColor] setStroke];
-
   [bezierPath stroke];
 }
 

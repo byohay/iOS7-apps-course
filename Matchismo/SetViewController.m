@@ -9,6 +9,7 @@
 #import "SetViewController.h"
 #import "SetCardDeck.h"
 #import "SetCard.h"
+#import "SetCardView.h"
 
 @interface SetViewController()
 
@@ -39,53 +40,58 @@
     return _stringToUIColor;
 }
 
-- (NSAttributedString*) titleForCard:(Card*) card
-{
-    NSMutableAttributedString* title = [[NSMutableAttributedString alloc] initWithString:@""];
-    SetCard* setCard = (SetCard*) card;
-    
-    for (int i = 1; i <= (int)setCard.numberOfSymbols; ++i) {
-        [title appendAttributedString:[[NSAttributedString alloc] initWithString:setCard.shape]];
-    }
-    
-    NSString* color = setCard.color;
-    
-    if ([setCard.shading isEqualToString:@"transparent"]) {
-        [title addAttributes: @{ NSForegroundColorAttributeName: [[self getStringToUIColor:color] colorWithAlphaComponent:0.1],
-                                 NSStrokeWidthAttributeName: @-5,
-                                 NSStrokeColorAttributeName: [UIColor blackColor]}
-                       range:NSMakeRange(0, [title length])];
-    }
-    else if([setCard.shading isEqualToString:@"open"]) {
-        [title addAttributes: @{ NSForegroundColorAttributeName: [UIColor whiteColor],
-                                 NSStrokeWidthAttributeName: @-5,
-                                 NSStrokeColorAttributeName: [self getStringToUIColor:color]}
-                       range:NSMakeRange(0, [title length])];
-    }
-    else {
-        [title addAttributes: @{ NSForegroundColorAttributeName: [self getStringToUIColor:color]}
-                       range:NSMakeRange(0, [title length])];
-    }
-    
-    return title;
-}
-
-
 - (UIColor*) getStringToUIColor:(NSString*) stringColor
 {
     return self.stringToUIColor[stringColor];
 }
 
-
-- (UIImage*) imageForCard:(Card*) card
+- (NSString*) getShape:(int) shape
 {
-    return [UIImage imageNamed: card.isChosen ? @"bluebackground" : @"cardfront"];
+  if (shape == 1) {
+    return @"squiggle";
+  }
+  else if (shape == 2) {
+    return @"diamond";
+  }
+
+  return @"roundedRect";
 }
 
-- (NSAttributedString*) historyTitleForCard:(Card*) card
+- (UIColor*) getColor:(int) color
 {
-    return [self titleForCard:card];
+  if (color == 1) {
+    return [UIColor redColor];
+  }
+  else if (color == 2) {
+    return [UIColor purpleColor];
+  }
+
+  return [UIColor greenColor];
 }
+
+- (NSString*) getShading:(int) shading
+{
+  if (shading == 1) {
+    return @"transparent";
+  }
+  else if (shading == 2) {
+    return @"filled";
+  }
+
+  return @"striped";
+}
+
+- (void) updateCardView:(UIView *) cardView withCard:(Card *)card
+{
+  SetCard *setCard = (SetCard *)card;
+  SetCardView* setCardView = (SetCardView *)cardView;
+
+  setCardView.shape = [self getShape:setCard.shape];
+  setCardView.color = [self getColor:setCard.color];
+  setCardView.fill = [self getShading:setCard.shading];
+  setCardView.numberOfSymbols = setCard.numberOfSymbols;
+}
+
 
 @end
 

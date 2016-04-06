@@ -32,7 +32,7 @@
     return [[NSAttributedString alloc] initWithString: card.contents];
 }
 
-- (void) updatedCardView:(UIView *) cardView withCard:(Card *)card
+- (void) updateCardView:(UIView *) cardView withCard:(Card *)card
 {
     PlayingCard *playingCard = (PlayingCard *)card;
     PlayingCardView* playingCardView = (PlayingCardView *)cardView;

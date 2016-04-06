@@ -104,7 +104,7 @@
         NSUInteger cardIndex = [self.cardViews indexOfObject:cardView];
         
         Card* card = [self.game cardAtIndex:cardIndex];
-        [self updatedCardView:cardView withCard:card];
+        [self updateCardView:cardView withCard:card];
         [cardView setNeedsDisplay];
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", @(self.game.score)];
