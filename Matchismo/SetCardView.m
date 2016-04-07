@@ -85,8 +85,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void) drawRightShapeAtHeight:(CGFloat) height
 {
-  CGContextRef context = UIGraphicsGetCurrentContext();
-  CGContextSaveGState(context);
   if ([self.shape isEqual: @"squiggle"]) {
     [self drawSquiggle:height];
   }
@@ -95,19 +93,6 @@ NS_ASSUME_NONNULL_BEGIN
   }
   else if ([self.shape isEqual:@"roundedRect"]) {
     [self drawRoundedRect:height];
-  }
-  CGContextRestoreGState(context);
-}
-
-- (void) setRightFill
-{
-  if ([self.fill isEqualToString:@"transparent"]) {
-  }
-  if ([self.fill isEqualToString:@"filled"]) {
-    [self.color setFill];
-  }
-  else {
-
   }
 }
 
@@ -140,9 +125,30 @@ NS_ASSUME_NONNULL_BEGIN
   return [upsideDownPath bezierPathByReversingPath];
 }
 
+- (void) setStripedFill: (UIBezierPath *)bezierPath
+{
+}
+
 - (void) fillShape: (UIBezierPath *)bezierPath
 {
-  UIRectFill(CGPathGetBoundingBox(bezierPath.CGPath));
+  if ([self.fill isEqualToString:@"transparent"]) {
+    return;
+  }
+
+  if ([self.fill isEqualToString:@"filled"]) {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+
+    [bezierPath addClip];
+    [self.color setFill];
+
+    UIRectFill(CGPathGetBoundingBox(bezierPath.CGPath));
+
+    CGContextRestoreGState(context);
+    return;
+  }
+
+  [self setStripedFill:bezierPath];
 }
 
 - (void) drawShape: (UIBezierPath *)bezierPath
