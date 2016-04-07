@@ -110,12 +110,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGFloat) shapeWidth { return self.bounds.size.width * (1 - DISTANCE_FROM_CORNER_FACTOR * 2); }
 
 - (UIBezierPath*) getUpsideDownPath:(UIBezierPath *)bezierPath withOrigin:(CGPoint)origin
-                secondPoint:(CGPoint)secondPoint withYMove:(CGFloat)YMove
+                          withYMove:(CGFloat)YMove
 {
+  CGFloat XMove = - self.bounds.size.width + (origin.x / DISTANCE_FROM_CORNER_FACTOR);
+
   UIBezierPath* upsideDownPath = [UIBezierPath bezierPathWithCGPath:bezierPath.CGPath];
   CGAffineTransform mirror = CGAffineTransformMakeRotation(M_PI);
   CGAffineTransform moveWithinBounds = CGAffineTransformMakeTranslation(self.bounds.size.width, self.bounds.size.height);
-  CGAffineTransform moveToPlace = CGAffineTransformMakeTranslation(-secondPoint.x + 4 * origin.x,
+  CGAffineTransform moveToPlace = CGAffineTransformMakeTranslation(XMove,
                                                                    YMove);
 
   [upsideDownPath applyTransform:mirror];
@@ -163,8 +165,8 @@ NS_ASSUME_NONNULL_BEGIN
   [self fillShape:bezierPath];
 }
 
-#define STROKE_WIDTH_PICTURE_RELATION 2500
-- (CGFloat) strokeWidth { return self.bounds.size.height * self.bounds.size.width
+#define STROKE_WIDTH_PICTURE_RELATION 50
+- (CGFloat) strokeWidth { return  sqrt(self.bounds.size.height * self.bounds.size.width)
     / STROKE_WIDTH_PICTURE_RELATION; }
 
 #pragma mark -
@@ -233,7 +235,7 @@ NS_ASSUME_NONNULL_BEGIN
   origin.y * (self.bounds.size.height / origin.y - 1);
 
   UIBezierPath* upsideDownPath = [self getUpsideDownPath:bezierPath withOrigin:origin
-                                               secondPoint:secondPoint withYMove:YMove];
+                                               withYMove:YMove];
 
   [bezierPath appendPath:upsideDownPath];
 
@@ -255,10 +257,8 @@ NS_ASSUME_NONNULL_BEGIN
                                          origin.y - [self shapeHeight] / 2)];
   [bezierPath addLineToPoint:CGPointMake(self.bounds.size.width - origin.x, origin.y)];
 
-  CGPoint lastPoint = CGPointMake(self.bounds.size.width - origin.x, origin.y);
-
   UIBezierPath* upsideDownPath = [self getUpsideDownPath:bezierPath withOrigin:origin
-                                             secondPoint:lastPoint withYMove:0];
+                                               withYMove:0];
 
   [bezierPath appendPath:upsideDownPath];
 
