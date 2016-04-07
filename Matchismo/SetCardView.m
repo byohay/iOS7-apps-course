@@ -99,6 +99,18 @@ NS_ASSUME_NONNULL_BEGIN
   CGContextRestoreGState(context);
 }
 
+- (void) setRightFill
+{
+  if ([self.fill isEqualToString:@"transparent"]) {
+  }
+  if ([self.fill isEqualToString:@"filled"]) {
+    [self.color setFill];
+  }
+  else {
+
+  }
+}
+
 #pragma mark -
 
 #pragma mark - Drawing
@@ -112,19 +124,37 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGFloat) shapeLeftmostX { return self.bounds.size.width * DISTANCE_FROM_CORNER_FACTOR; }
 - (CGFloat) shapeWidth { return self.bounds.size.width * (1 - DISTANCE_FROM_CORNER_FACTOR * 2); }
 
-- (void)drawShapeUpsideDown:(UIBezierPath *)bezierPath withOrigin:(CGPoint)origin
+- (UIBezierPath*) getUpsideDownPath:(UIBezierPath *)bezierPath withOrigin:(CGPoint)origin
                 secondPoint:(CGPoint)secondPoint withYMove:(CGFloat)YMove
 {
+  UIBezierPath* upsideDownPath = [UIBezierPath bezierPathWithCGPath:bezierPath.CGPath];
   CGAffineTransform mirror = CGAffineTransformMakeRotation(M_PI);
-  CGAffineTransform translate = CGAffineTransformMakeTranslation(self.bounds.size.width, self.bounds.size.height);
+  CGAffineTransform moveWithinBounds = CGAffineTransformMakeTranslation(self.bounds.size.width, self.bounds.size.height);
   CGAffineTransform moveToPlace = CGAffineTransformMakeTranslation(-secondPoint.x + 4 * origin.x,
                                                                    YMove);
 
-  [bezierPath applyTransform:mirror];
-  [bezierPath applyTransform:translate];
-  [bezierPath applyTransform:moveToPlace];
+  [upsideDownPath applyTransform:mirror];
+  [upsideDownPath applyTransform:moveWithinBounds];
+  [upsideDownPath applyTransform:moveToPlace];
+
+  return [upsideDownPath bezierPathByReversingPath];
+}
+
+- (void) fillShape: (UIBezierPath *)bezierPath
+{
+  UIRectFill(CGPathGetBoundingBox(bezierPath.CGPath));
+}
+
+- (void) drawShape: (UIBezierPath *)bezierPath
+{
+  bezierPath.lineWidth = [self strokeWidth];
+  [self.color setStroke];
+
+  [bezierPath addClip];
+  [self setRightFill];
 
   [bezierPath stroke];
+  [self fillShape:bezierPath];
 }
 
 #define STROKE_WIDTH_PICTURE_RELATION 2500
@@ -177,7 +207,6 @@ NS_ASSUME_NONNULL_BEGIN
 
   CGFloat amplitude = 1;
 
-  [bezierPath moveToPoint: point];
   [bezierPath addCurveToPoint: CGPointMake(point.x, point.y + [self shapeHeight])
                 controlPoint1: CGPointMake(point.x + amplitude, firstPointHeight)
                 controlPoint2: CGPointMake(point.x + amplitude, secondPointHeight)];
@@ -186,8 +215,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) drawSquiggle:(CGFloat)height
 {
   UIBezierPath* bezierPath = [UIBezierPath bezierPath];
-  bezierPath.lineWidth = [self strokeWidth];
-  [self.color setStroke];
 
   CGFloat originHeight = height - [self shapeHeight] / 2;
 
@@ -195,13 +222,16 @@ NS_ASSUME_NONNULL_BEGIN
 
   CGPoint secondPoint = [self drawLongCurve:bezierPath startingAt:origin];
   [self drawShortCurve:bezierPath startingAt:secondPoint];
-  [bezierPath stroke];
 
   CGFloat YMove = origin.y + [self shapeHeight] -
   origin.y * (self.bounds.size.height / origin.y - 1);
 
-  [self drawShapeUpsideDown:bezierPath withOrigin:origin
-                secondPoint:secondPoint withYMove:YMove];
+  UIBezierPath* upsideDownPath = [self getUpsideDownPath:bezierPath withOrigin:origin
+                                               secondPoint:secondPoint withYMove:YMove];
+
+  [bezierPath appendPath:upsideDownPath];
+
+  [self drawShape:bezierPath];
 }
 
 #pragma mark -
@@ -211,8 +241,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) drawDiamond:(CGFloat)height
 {
   UIBezierPath* bezierPath = [UIBezierPath bezierPath];
-  bezierPath.lineWidth = [self strokeWidth];
-  [self.color setStroke];
 
   CGPoint origin = CGPointMake([self shapeLeftmostX], height);
 
@@ -221,14 +249,15 @@ NS_ASSUME_NONNULL_BEGIN
                                          origin.y - [self shapeHeight] / 2)];
   [bezierPath addLineToPoint:CGPointMake(self.bounds.size.width - origin.x, origin.y)];
 
-  [bezierPath stroke];
-
   CGPoint lastPoint = CGPointMake(self.bounds.size.width - origin.x, origin.y);
 
-  [self drawShapeUpsideDown:bezierPath withOrigin:origin
-                secondPoint:lastPoint withYMove:0];
-}
+  UIBezierPath* upsideDownPath = [self getUpsideDownPath:bezierPath withOrigin:origin
+                                             secondPoint:lastPoint withYMove:0];
 
+  [bezierPath appendPath:upsideDownPath];
+
+  [self drawShape:bezierPath];
+}
 
 #pragma mark -
 
@@ -244,10 +273,8 @@ NS_ASSUME_NONNULL_BEGIN
 
   UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:shapeRect cornerRadius:
                               SHAPE_CORNER_RADIUS];
-  bezierPath.lineWidth = [self strokeWidth];
-  [self.color setStroke];
 
-  [bezierPath stroke];
+  [self drawShape:bezierPath];
 }
 
 @end
