@@ -85,6 +85,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void) drawRightShapeAtHeight:(CGFloat) height
 {
+  CGContextRef context = UIGraphicsGetCurrentContext();
+  CGContextSaveGState(context);
   if ([self.shape isEqual: @"squiggle"]) {
     [self drawSquiggle:height];
   }
@@ -94,6 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
   else if ([self.shape isEqual:@"roundedRect"]) {
     [self drawRoundedRect:height];
   }
+  CGContextRestoreGState(context);
 }
 
 #pragma mark -
