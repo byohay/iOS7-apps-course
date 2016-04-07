@@ -127,8 +127,24 @@ NS_ASSUME_NONNULL_BEGIN
   return [upsideDownPath bezierPathByReversingPath];
 }
 
+#define STRIPE_LINE_WIDTH_FACTOR 80
+#define STRIPE_JUMP_FACTOR 40
+
+- (CGFloat) stripeWidth { return self.bounds.size.width / STRIPE_LINE_WIDTH_FACTOR; }
+- (int) stripeJump { return roundf(self.bounds.size.width / STRIPE_JUMP_FACTOR); }
+
 - (void) setStripedFill: (UIBezierPath *)bezierPath
 {
+  UIBezierPath *stripes = [UIBezierPath bezierPath];
+  for ( int x = 0; x < bezierPath.bounds.size.width; x += [self stripeJump])
+  {
+    [stripes moveToPoint:CGPointMake( bezierPath.bounds.origin.x + x, bezierPath.bounds.origin.y)];
+    [stripes addLineToPoint:CGPointMake( bezierPath.bounds.origin.x + x, bezierPath.bounds.origin.y + bezierPath.bounds.size.height)];
+  }
+  [stripes setLineWidth:[self stripeWidth]];
+
+  [self.color set];
+  [stripes stroke];
 }
 
 - (void) fillShape: (UIBezierPath *)bezierPath
@@ -136,30 +152,26 @@ NS_ASSUME_NONNULL_BEGIN
   if ([self.fill isEqualToString:@"transparent"]) {
     return;
   }
+  CGContextRef context = UIGraphicsGetCurrentContext();
+  CGContextSaveGState(context);
+
+  [bezierPath addClip];
 
   if ([self.fill isEqualToString:@"filled"]) {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
-
-    [bezierPath addClip];
     [self.color setFill];
-
     UIRectFill(CGPathGetBoundingBox(bezierPath.CGPath));
-
-    CGContextRestoreGState(context);
-    return;
+  }
+  else {
+    [self setStripedFill:bezierPath];
   }
 
-  [self setStripedFill:bezierPath];
+  CGContextRestoreGState(context);
 }
 
 - (void) drawShape: (UIBezierPath *)bezierPath
 {
   bezierPath.lineWidth = [self strokeWidth];
   [self.color setStroke];
-
-  [bezierPath addClip];
-  [self setRightFill];
 
   [bezierPath stroke];
   [self fillShape:bezierPath];
