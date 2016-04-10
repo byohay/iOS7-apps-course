@@ -123,7 +123,7 @@
 
 - (void) updateUI
 {
-    for (CardView* cardView in self.cardViews) {
+    for (CardView* cardView in self.overallCardsView.subviews) {
         NSUInteger cardIndex = [self.cardViews indexOfObject:cardView];
         
         Card* card = [self.game cardAtIndex:cardIndex];
@@ -131,9 +131,6 @@
         cardView.isMatched = card.isMatched;
         [cardView setNeedsDisplay];
     }
-
-  [self removeMatchedCards];
-  [self.overallCardsView setNeedsDisplay];
 
   self.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", @(self.game.score)];
 }
@@ -149,6 +146,7 @@
   }
 
   [self removeCards:matchedCardViews];
+  [self.overallCardsView setNeedsDisplay];
 }
 
 - (void) removeCards:(NSArray *)cardsToRemove
@@ -160,9 +158,15 @@
   CGPoint tapPoint = [sender locationInView:self.overallCardsView];
   UIView* cardView = [self.overallCardsView hitTest:tapPoint withEvent:nil];
 
+  if (cardView == self.overallCardsView) {
+    return;
+  }
+
   NSUInteger cardIndex = [self.cardViews indexOfObject:cardView];
   [self.game chooseCardAtIndex:cardIndex];
   [self updateUI];
+
+  [self removeMatchedCards];
 }
 
 @end
