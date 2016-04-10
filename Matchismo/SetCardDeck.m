@@ -16,10 +16,10 @@
     self = [super init];
     
     if (self){
-        for (int symbol = 1; symbol <= [SetCard maxNumberOfSymbols]; ++symbol) {
-            for(int shading = 1; shading <= [SetCard maxNumberOfSymbols]; ++shading) {
-                for(int color = 1; color <= [SetCard maxNumberOfSymbols]; ++color) {
-                    for(int shape = 1; shape <= [SetCard maxNumberOfSymbols]; ++shape) {
+        for (int symbol = 1; symbol <= [SetCard maxNumberInEachFeature]; ++symbol) {
+            for(int shading = 1; shading <= [SetCard maxNumberInEachFeature]; ++shading) {
+                for(int color = 1; color <= [SetCard maxNumberInEachFeature]; ++color) {
+                    for(int shape = 1; shape <= [SetCard maxNumberInEachFeature]; ++shape) {
 
                         SetCard* card = [[SetCard alloc] init];
                         card.numberOfSymbols = symbol;

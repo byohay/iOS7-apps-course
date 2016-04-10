@@ -85,6 +85,7 @@
 }
 
 - (IBAction)touchResetButton:(UIButton*)sender {
+  self.deck = [self createDeck];
     self.game = [self createGame];
     self.cardViews = [self createCardViews];
   [self resetOverallCardsView];
@@ -140,11 +141,10 @@
   return cardViews;
 }
 
-
 - (CardMatchingGame*) createGame
 {
     return [[CardMatchingGame alloc] initWithCardCount:[self.cardViews count]
-                                             usingDeck:[self createDeck]
+                                             usingDeck:self.deck
                                  numberOfMatchingCards:[self getMatchingMode]];
 }
 

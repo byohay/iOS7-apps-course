@@ -70,25 +70,9 @@
     return isMatched ? 1 : 0;
 }
 
-+ (int) maxNumberOfSymbols
++ (int) maxNumberInEachFeature
 {
     return 3;
 }
-
-+ (NSArray*) validShapes
-{
-    return @[@1, @2, @3];
-}
-
-+ (NSArray*) validColors
-{
-  return @[@1, @2, @3];
-}
-
-+ (NSArray*) validShading
-{
-  return @[@1, @2, @3];
-}
-
 
 @end

@@ -15,10 +15,7 @@
 @property (nonatomic) int color;
 @property (nonatomic) int shading;
 
-+ (int) maxNumberOfSymbols;
-+ (NSArray*) validShapes;
-+ (NSArray*) validColors;
-+ (NSArray*) validShading;
++ (int) maxNumberInEachFeature;
 
 
 @end
