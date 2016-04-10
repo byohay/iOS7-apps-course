@@ -18,6 +18,7 @@
 - (void) chooseCardAtIndex: (NSUInteger)index;
 - (Card*) cardAtIndex: (NSUInteger)index;
 - (NSUInteger) indexOfCard:(Card*)card;
+- (void) addCard:(Card *)card;
 
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic) NSUInteger matchingCardsNumber;

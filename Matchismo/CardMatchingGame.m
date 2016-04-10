@@ -172,5 +172,9 @@ static const int COST_TO_CHOOSE = 1;
   return [self.cards indexOfObject:card];
 }
 
+- (void) addCard:(Card *)card
+{
+  [self.cards addObject:card];
+}
 
 @end

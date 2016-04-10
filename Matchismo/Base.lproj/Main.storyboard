@@ -156,13 +156,23 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="451"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQ7-Tb-R4I">
-                                <rect key="frame" x="158" y="523" width="59" height="44"/>
+                                <rect key="frame" x="17" y="523" width="65" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="Deal">
+                                <state key="normal" title="Redeal">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="touchResetButton:" destination="4DW-0c-BLH" eventType="touchUpInside" id="E91-GI-ovX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bC7-IX-xYY">
+                                <rect key="frame" x="250" y="523" width="105" height="44"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="More cards">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchMoreCards:" destination="4DW-0c-BLH" eventType="touchUpInside" id="Mzi-Iw-V0W"/>
                                 </connections>
                             </button>
                         </subviews>

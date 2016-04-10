@@ -69,12 +69,25 @@
     return _deck;
 }
 
+- (IBAction)touchMoreCards:(UIButton*)sender {
+
+  NSUInteger numberOfCardsBeforeAdding = [self.cardViews count];
+  self.cardViews = [self createCardViews:([self.cardViews count] + 3)];
+  NSUInteger numberOfCardsToAdd = [self.cardViews count] - numberOfCardsBeforeAdding;
+
+  for (int i = 0; i < numberOfCardsToAdd; ++i) {
+    [self.game addCard:[self.deck drawRandomCard]];
+  }
+
+  [self resetOverallCardsView];
+  [self updateUI];
+  [self removeMatchedCardsFromOverall];
+}
 
 - (IBAction)touchResetButton:(UIButton*)sender {
     self.game = [self createGame];
     self.cardViews = [self createCardViews];
   [self resetOverallCardsView];
-
     [self updateUI];
 }
 
@@ -83,20 +96,39 @@
   [[self.overallCardsView subviews]
    makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
-  for (UIView* view in self.cardViews) {
-    [self.overallCardsView addSubview:view];
+  for (CardView* view in self.cardViews) {
+    if (!view.isMatched) {
+      [self.overallCardsView addSubview:view];
+     }
   }
-
+  [self.overallCardsView setNeedsDisplay];
 }
 
+- (void) removeMatchedCardsFromOverall
+{
+  for (CardView* view in self.overallCardsView.subviews) {
+    if (view.isMatched) {
+      [view removeFromSuperview];
+    }
+  }
+  [self.overallCardsView setNeedsDisplay];
+}
+
+
 - (NSMutableArray *)createCardViews
+{
+  NSMutableArray *cardViews = [self createCardViews:12];
+  return cardViews;
+}
+
+- (NSMutableArray *)createCardViews:(NSUInteger)numberOfCards
 {
   NSMutableArray *cardViews = [[NSMutableArray alloc] init];
   Grid* grid = [[Grid alloc] init];
 
   grid.cellAspectRatio = 0.8;
   grid.size = self.overallCardsView.bounds.size;
-  grid.minimumNumberOfCells = 12;
+  grid.minimumNumberOfCells = numberOfCards;
 
   for (int row = 0; row < grid.rowCount; ++row) {
     for (int col = 0; col < grid.columnCount; ++col) {
