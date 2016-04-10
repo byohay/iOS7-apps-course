@@ -33,6 +33,9 @@
   for (UIView* view in self.cardViews) {
     [self.overallCardsView addSubview:view];
   }
+
+  [self.overallCardsView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:
+   self action:@selector(tap:)]];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -110,5 +113,15 @@
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", @(self.game.score)];
 }
 
+- (void) tap:(UITapGestureRecognizer *)sender
+{
+  CGPoint tapPoint = [sender locationInView:self.overallCardsView];
+  UIView* cardView = [self.overallCardsView hitTest:tapPoint withEvent:nil];
+
+  NSUInteger cardIndex = [self.cardViews indexOfObject:cardView];
+  [self.game chooseCardAtIndex:cardIndex];
+
+  [self updateUI];
+}
 
 @end
