@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Deck.h"
+#import "Grid.h"
 
 @interface CardGameViewController : UIViewController
 
@@ -16,4 +17,5 @@
 - (NSUInteger) getMatchingMode; // abstract
 - (NSAttributedString*) historyTitleForCard:(Card*) card; // abstract
 - (void) updateCardView:(UIView *) cardView withCard:(Card *)card; // abstract
+- (UIView*) createCardView:(CGRect)frame; // abstract
 @end

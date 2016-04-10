@@ -93,5 +93,10 @@
 }
 
 
+- (UIView*) createCardView:(CGRect)frame
+{
+  return [[SetCardView alloc] initWithFrame:frame];
+}
+
 @end
 

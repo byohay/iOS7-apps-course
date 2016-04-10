@@ -11,25 +11,39 @@
 #import "CardMatchingGame.h"
 #import "HistoryViewController.h"
 
+
 @interface CardGameViewController ()
 
 @property (strong, nonatomic) Deck* deck;
-@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *cardViews;
+@property (strong, nonatomic) IBOutletCollection(UIView) NSMutableArray *cardViews;
 @property (strong, nonatomic) CardMatchingGame* game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) NSMutableArray* history;
 @property (strong, nonatomic) NSAttributedString* lastConsiderationLabel;
-
+@property (weak, nonatomic) IBOutlet UIView *overallCardsView;
+\
 @end
 
 
 @implementation CardGameViewController
 
+- (void) viewDidLoad
+{
+  [super viewDidLoad];
+
+  for (UIView* view in self.cardViews) {
+    [self.overallCardsView addSubview:view];
+  }
+}
+
 - (void) viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    [self updateUI];
+  [super viewWillAppear:animated];
+
+  [self.overallCardsView setNeedsDisplay];
+  [self updateUI];
 }
+
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -41,6 +55,29 @@
         }
     }
 }
+
+- (NSMutableArray*)cardViews
+{
+  if (!_cardViews)
+  {
+    _cardViews = [[NSMutableArray alloc] init];
+    Grid* grid = [[Grid alloc] init];
+
+    grid.cellAspectRatio = 0.8;
+    grid.size = self.overallCardsView.bounds.size;
+    grid.minimumNumberOfCells = 12;
+
+    for (int row = 0; row < grid.rowCount; ++row) {
+      for (int col = 0; col < grid.columnCount; ++col) {
+        CGRect viewFrame = [grid frameOfCellAtRow:row inColumn:col];
+        [_cardViews addObject:[self createCardView:viewFrame]];
+      }
+    }
+  }
+
+  return _cardViews;
+}
+
 
 - (CardMatchingGame*)game
 {

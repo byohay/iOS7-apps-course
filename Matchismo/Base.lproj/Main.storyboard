@@ -57,8 +57,11 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uep-7H-sFM">
+                                <rect key="frame" x="0.0" y="64" width="375" height="451"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HP-B1-Xyz">
-                                <rect key="frame" x="148" y="510" width="59" height="44"/>
+                                <rect key="frame" x="158" y="523" width="59" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Deal">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -67,106 +70,6 @@
                                     <action selector="touchResetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Qw-O9-Vit"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MVv-Yt-u00" customClass="PlayingCardView">
-                                <rect key="frame" x="295" y="72" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LYO-Gr-hZ0" customClass="PlayingCardView">
-                                <rect key="frame" x="225" y="72" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XrO-wG-vNm" customClass="PlayingCardView">
-                                <rect key="frame" x="157" y="72" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WCx-vd-iRA" customClass="PlayingCardView">
-                                <rect key="frame" x="88" y="72" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ubS-A6-qsJ" customClass="PlayingCardView">
-                                <rect key="frame" x="20" y="72" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wxn-TT-Nb6" customClass="PlayingCardView">
-                                <rect key="frame" x="295" y="160" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bEW-Fh-NYD" customClass="PlayingCardView">
-                                <rect key="frame" x="225" y="160" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xxx-VA-fWu" customClass="PlayingCardView">
-                                <rect key="frame" x="157" y="160" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p0t-CB-4KG" customClass="PlayingCardView">
-                                <rect key="frame" x="88" y="160" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJK-IU-yDB" customClass="PlayingCardView">
-                                <rect key="frame" x="20" y="160" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wcF-64-4Od" customClass="PlayingCardView">
-                                <rect key="frame" x="295" y="248" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eHZ-bf-1mM" customClass="PlayingCardView">
-                                <rect key="frame" x="225" y="248" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IMX-0C-sgk" customClass="PlayingCardView">
-                                <rect key="frame" x="157" y="248" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UUl-K7-2Ns" customClass="PlayingCardView">
-                                <rect key="frame" x="88" y="248" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ngb-JB-uHp" customClass="PlayingCardView">
-                                <rect key="frame" x="20" y="248" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xpG-mD-SOw" customClass="PlayingCardView">
-                                <rect key="frame" x="295" y="336" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wWP-TW-iEw" customClass="PlayingCardView">
-                                <rect key="frame" x="225" y="336" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I2w-re-xFd" customClass="PlayingCardView">
-                                <rect key="frame" x="157" y="336" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Qg-FS-o7Z" customClass="PlayingCardView">
-                                <rect key="frame" x="88" y="336" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MKk-7J-499" customClass="PlayingCardView">
-                                <rect key="frame" x="20" y="336" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o4T-T7-5Bd" customClass="PlayingCardView">
-                                <rect key="frame" x="295" y="424" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zZl-O8-3Ml" customClass="PlayingCardView">
-                                <rect key="frame" x="225" y="424" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6dd-bG-MZM" customClass="PlayingCardView">
-                                <rect key="frame" x="157" y="424" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LYR-5E-tGu" customClass="PlayingCardView">
-                                <rect key="frame" x="88" y="424" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="go5-ae-ars" customClass="PlayingCardView">
-                                <rect key="frame" x="20" y="424" width="60" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -187,32 +90,8 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="overallCardsView" destination="Uep-7H-sFM" id="vpT-oS-7cF"/>
                         <outlet property="scoreLabel" destination="eja-aK-QHU" id="sxI-Ne-cgJ"/>
-                        <outletCollection property="cardViews" destination="MVv-Yt-u00" id="tkg-2o-Ul3"/>
-                        <outletCollection property="cardViews" destination="LYO-Gr-hZ0" id="gMo-Ie-5aP"/>
-                        <outletCollection property="cardViews" destination="XrO-wG-vNm" id="5XW-LK-Pmf"/>
-                        <outletCollection property="cardViews" destination="WCx-vd-iRA" id="LW8-Gx-JNO"/>
-                        <outletCollection property="cardViews" destination="ubS-A6-qsJ" id="vgN-Ii-vAt"/>
-                        <outletCollection property="cardViews" destination="Wxn-TT-Nb6" id="aUl-ei-oZM"/>
-                        <outletCollection property="cardViews" destination="bEW-Fh-NYD" id="88e-gb-KBQ"/>
-                        <outletCollection property="cardViews" destination="xxx-VA-fWu" id="zof-pW-H0K"/>
-                        <outletCollection property="cardViews" destination="p0t-CB-4KG" id="FDK-e9-Oau"/>
-                        <outletCollection property="cardViews" destination="XJK-IU-yDB" id="3mT-Fd-IQt"/>
-                        <outletCollection property="cardViews" destination="wcF-64-4Od" id="TpI-0V-Ng9"/>
-                        <outletCollection property="cardViews" destination="eHZ-bf-1mM" id="QmB-5Z-LHd"/>
-                        <outletCollection property="cardViews" destination="IMX-0C-sgk" id="q6W-Yj-5BT"/>
-                        <outletCollection property="cardViews" destination="UUl-K7-2Ns" id="KGb-fh-8DT"/>
-                        <outletCollection property="cardViews" destination="Ngb-JB-uHp" id="SVY-Zu-LYP"/>
-                        <outletCollection property="cardViews" destination="xpG-mD-SOw" id="pdb-yq-RE9"/>
-                        <outletCollection property="cardViews" destination="wWP-TW-iEw" id="ttL-sv-8yO"/>
-                        <outletCollection property="cardViews" destination="I2w-re-xFd" id="oNz-sz-aHx"/>
-                        <outletCollection property="cardViews" destination="9Qg-FS-o7Z" id="eUH-7Q-Jzs"/>
-                        <outletCollection property="cardViews" destination="MKk-7J-499" id="mhc-16-XHj"/>
-                        <outletCollection property="cardViews" destination="o4T-T7-5Bd" id="yPd-Bg-Iag"/>
-                        <outletCollection property="cardViews" destination="zZl-O8-3Ml" id="wsJ-99-15W"/>
-                        <outletCollection property="cardViews" destination="6dd-bG-MZM" id="gWk-m1-kbe"/>
-                        <outletCollection property="cardViews" destination="LYR-5E-tGu" id="ZOg-w0-yQT"/>
-                        <outletCollection property="cardViews" destination="go5-ae-ars" id="8te-vd-dIr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -284,52 +163,11 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nwc-Wx-Lia" customClass="SetCardView">
-                                <rect key="frame" x="275" y="72" width="80" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fs5-DM-4sb" customClass="SetCardView">
-                                <rect key="frame" x="20" y="72" width="80" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNk-zN-GNR" customClass="SetCardView">
-                                <rect key="frame" x="275" y="180" width="80" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jAn-qs-DAX" customClass="SetCardView">
-                                <rect key="frame" x="147" y="180" width="80" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O6t-bc-4bV" customClass="SetCardView">
-                                <rect key="frame" x="20" y="180" width="80" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wno-A6-1QU" customClass="SetCardView">
-                                <rect key="frame" x="275" y="288" width="80" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oig-zY-vpM" customClass="SetCardView">
-                                <rect key="frame" x="148" y="288" width="80" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ER6-OU-jr1" customClass="SetCardView">
-                                <rect key="frame" x="20" y="288" width="80" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgW-g8-VsS" customClass="SetCardView">
-                                <rect key="frame" x="275" y="397" width="80" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jep-ct-hBt" customClass="SetCardView">
-                                <rect key="frame" x="20" y="397" width="80" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ee6-69-2hn" customClass="SetCardView">
-                                <rect key="frame" x="148" y="72" width="80" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wLT-ao-0ID">
+                                <rect key="frame" x="0.0" y="64" width="375" height="451"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQ7-Tb-R4I">
-                                <rect key="frame" x="158" y="505" width="59" height="44"/>
+                                <rect key="frame" x="158" y="523" width="59" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Deal">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -338,10 +176,6 @@
                                     <action selector="touchResetButton:" destination="4DW-0c-BLH" eventType="touchUpInside" id="E91-GI-ovX"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bj2-Wh-2sh" customClass="SetCardView">
-                                <rect key="frame" x="148" y="397" width="80" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="0.87389547413793101" colorSpace="calibratedRGB"/>
                     </view>
@@ -362,19 +196,8 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="overallCardsView" destination="wLT-ao-0ID" id="Rfk-Td-LS2"/>
                         <outlet property="scoreLabel" destination="yNy-nM-NE9" id="DzM-Jg-vEj"/>
-                        <outletCollection property="cardViews" destination="nwc-Wx-Lia" id="0rr-ZK-asU"/>
-                        <outletCollection property="cardViews" destination="Ee6-69-2hn" id="Hlw-hK-g6c"/>
-                        <outletCollection property="cardViews" destination="fs5-DM-4sb" id="bh8-7o-dBn"/>
-                        <outletCollection property="cardViews" destination="HNk-zN-GNR" id="ysd-T9-xb3"/>
-                        <outletCollection property="cardViews" destination="jAn-qs-DAX" id="uLn-oN-rGv"/>
-                        <outletCollection property="cardViews" destination="O6t-bc-4bV" id="hFh-kK-qfv"/>
-                        <outletCollection property="cardViews" destination="Wno-A6-1QU" id="Dfx-VQ-CE5"/>
-                        <outletCollection property="cardViews" destination="oig-zY-vpM" id="gVp-uf-SUY"/>
-                        <outletCollection property="cardViews" destination="ER6-OU-jr1" id="UwO-0v-ycG"/>
-                        <outletCollection property="cardViews" destination="TgW-g8-VsS" id="Cs3-mN-OIE"/>
-                        <outletCollection property="cardViews" destination="bj2-Wh-2sh" id="rGU-L4-Enz"/>
-                        <outletCollection property="cardViews" destination="Jep-ct-hBt" id="gpi-L9-WpH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aeg-aC-p3Q" sceneMemberID="firstResponder"/>
@@ -383,6 +206,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="52y-ln-DMg"/>
+        <segue reference="6ts-1h-T9d"/>
     </inferredMetricsTieBreakers>
 </document>

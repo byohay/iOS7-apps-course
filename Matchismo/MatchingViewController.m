@@ -42,4 +42,9 @@
     playingCardView.faceUp = playingCard.isChosen;
 }
 
+- (UIView*) createCardView:(CGRect)viewFrame
+{
+  return [[PlayingCardView alloc] initWithFrame:viewFrame];
+}
+
 @end
