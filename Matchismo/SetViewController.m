@@ -72,6 +72,7 @@
   setCardView.color = [self getColor:setCard.color];
   setCardView.fill = [self getShading:setCard.shading];
   setCardView.numberOfSymbols = setCard.numberOfSymbols;
+  setCardView.isChosen = setCard.isChosen;
 }
 
 

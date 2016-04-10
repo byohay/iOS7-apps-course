@@ -52,18 +52,34 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark -
 
 
+- (void)fillCardBack
+{
+  if (self.isChosen) {
+    UIGraphicsBeginImageContext(self.frame.size);
+    [[UIImage imageNamed:@"bluebackground"] drawInRect:self.bounds];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    [[UIColor colorWithPatternImage:image] setFill];
+  }
+  else {
+    [[UIColor whiteColor] setFill];
+  }
+}
+
 - (void) drawRect:(CGRect)rect
 {
-    UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:
+  UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:
                                [CardViewConfiguration cornerRadius:self.bounds.size.height]];
 
-    [roundedRect addClip];
-    
-    [[UIColor whiteColor] setFill];
-    UIRectFill(self.bounds);
-    
-    [[UIColor blackColor] setStroke];
-    [roundedRect stroke];
+  [roundedRect addClip];
+
+  [self fillCardBack];
+
+  UIRectFill(self.bounds);
+
+  [[UIColor blackColor] setStroke];
+  [roundedRect stroke];
 
   if (self.numberOfSymbols == 1) {
     [self drawRightShapeAtHeight:self.bounds.size.height / 2];

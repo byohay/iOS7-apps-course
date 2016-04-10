@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString* shape;
 @property (strong, nonatomic) UIColor* color;
 @property (strong, nonatomic) NSString* fill;
+@property (nonatomic) BOOL isChosen;
 
 @end
 
