@@ -10,6 +10,7 @@
 #import "Deck.h"
 #import "CardMatchingGame.h"
 #import "HistoryViewController.h"
+#import "CardView.h"
 
 
 @interface CardGameViewController ()
@@ -30,9 +31,7 @@
 {
   [super viewDidLoad];
 
-  for (UIView* view in self.cardViews) {
-    [self.overallCardsView addSubview:view];
-  }
+  [self resetOverallCardsView];
 
   [self.overallCardsView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:
    self action:@selector(tap:)]];
@@ -42,7 +41,6 @@
 {
   [super viewWillAppear:animated];
 
-  [self.overallCardsView setNeedsDisplay];
   [self updateUI];
 }
 
@@ -74,7 +72,21 @@
 
 - (IBAction)touchResetButton:(UIButton*)sender {
     self.game = [self createGame];
+    self.cardViews = [self createCardViews];
+  [self resetOverallCardsView];
+
     [self updateUI];
+}
+
+- (void) resetOverallCardsView
+{
+  [[self.overallCardsView subviews]
+   makeObjectsPerformSelector:@selector(removeFromSuperview)];
+
+  for (UIView* view in self.cardViews) {
+    [self.overallCardsView addSubview:view];
+  }
+
 }
 
 - (NSMutableArray *)createCardViews
@@ -111,26 +123,29 @@
 
 - (void) updateUI
 {
-    for (UIView* cardView in self.cardViews) {
+    for (CardView* cardView in self.cardViews) {
         NSUInteger cardIndex = [self.cardViews indexOfObject:cardView];
         
         Card* card = [self.game cardAtIndex:cardIndex];
         [self updateCardView:cardView withCard:card];
+        cardView.isMatched = card.isMatched;
         [cardView setNeedsDisplay];
     }
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", @(self.game.score)];
 
+  [self removeMatchedCards];
+  [self.overallCardsView setNeedsDisplay];
+
+  self.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", @(self.game.score)];
 }
 
-- (void) matchingOccured
+- (void) removeMatchedCards
 {
   NSMutableArray* matchedCardViews = [[NSMutableArray alloc] init];
 
-  for (Card* card in self.game.cardsToDisplay) {
-    NSUInteger index = [self.game indexOfCard:card];
-
-    UIView* cardView = self.cardViews[index];
-    [matchedCardViews addObject:cardView];
+  for (CardView* cardView in self.overallCardsView.subviews) {
+    if (cardView.isMatched) {
+      [matchedCardViews addObject:cardView];
+    }
   }
 
   [self removeCards:matchedCardViews];
@@ -147,11 +162,6 @@
 
   NSUInteger cardIndex = [self.cardViews indexOfObject:cardView];
   [self.game chooseCardAtIndex:cardIndex];
-
-  if (self.game.score > 0) {
-    [self matchingOccured];
-  }
-  
   [self updateUI];
 }
 

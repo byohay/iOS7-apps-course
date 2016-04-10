@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B9390CC71CBA37DB0079390A /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = B9390CC61CBA37DB0079390A /* Grid.m */; };
+		B94BB7DF1CBA91450029C0D2 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = B94BB7DE1CBA91450029C0D2 /* CardView.m */; };
 		B973539E1CAD2251004A8196 /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B973539D1CAD2251004A8196 /* SetViewController.m */; };
 		B97353A71CAD28F1004A8196 /* SetCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = B97353A61CAD28F1004A8196 /* SetCardDeck.m */; };
 		B97353AD1CAD47B8004A8196 /* MatchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B97353AC1CAD47B8004A8196 /* MatchingViewController.m */; };
@@ -51,6 +52,8 @@
 /* Begin PBXFileReference section */
 		B9390CC51CBA37DB0079390A /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Grid.h; path = Matchismo/Grid/Grid.h; sourceTree = "<group>"; };
 		B9390CC61CBA37DB0079390A /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Grid.m; path = Matchismo/Grid/Grid.m; sourceTree = "<group>"; };
+		B94BB7DD1CBA91450029C0D2 /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardView.h; path = Matchismo/CardView.h; sourceTree = "<group>"; };
+		B94BB7DE1CBA91450029C0D2 /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardView.m; path = Matchismo/CardView.m; sourceTree = "<group>"; };
 		B973539C1CAD2251004A8196 /* SetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetViewController.h; path = Matchismo/SetViewController.h; sourceTree = "<group>"; };
 		B973539D1CAD2251004A8196 /* SetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetViewController.m; path = Matchismo/SetViewController.m; sourceTree = "<group>"; };
 		B97353A51CAD28F1004A8196 /* SetCardDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetCardDeck.h; path = Matchismo/SetCardDeck.h; sourceTree = "<group>"; };
@@ -146,6 +149,8 @@
 				B9ACC29B1CB3A1D9001F6FF7 /* SetCardView.m */,
 				B9ACC29D1CB3B628001F6FF7 /* CardViewConfiguration.h */,
 				B9ACC29E1CB3B628001F6FF7 /* CardViewConfiguration.m */,
+				B94BB7DD1CBA91450029C0D2 /* CardView.h */,
+				B94BB7DE1CBA91450029C0D2 /* CardView.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 				B973539E1CAD2251004A8196 /* SetViewController.m in Sources */,
 				B97353A71CAD28F1004A8196 /* SetCardDeck.m in Sources */,
 				B9B8DC9E1CB299AF00D038A1 /* PlayingCardView.m in Sources */,
+				B94BB7DF1CBA91450029C0D2 /* CardView.m in Sources */,
 				B9390CC71CBA37DB0079390A /* Grid.m in Sources */,
 				B9B58BAF1CA99108002EE923 /* CardMatchingGame.m in Sources */,
 				B9B8DC9B1CB156D500D038A1 /* HistoryViewController.m in Sources */,

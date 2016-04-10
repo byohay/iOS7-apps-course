@@ -4,10 +4,11 @@
 // :: Framework ::
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "CardView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SetCardView : UIView
+@interface SetCardView : CardView
 
 @property (nonatomic) int numberOfSymbols;
 @property (strong, nonatomic) NSString* shape;
