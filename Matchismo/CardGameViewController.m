@@ -51,19 +51,7 @@
 {
   if (!_cardViews)
   {
-    _cardViews = [[NSMutableArray alloc] init];
-    Grid* grid = [[Grid alloc] init];
-
-    grid.cellAspectRatio = 0.8;
-    grid.size = self.overallCardsView.bounds.size;
-    grid.minimumNumberOfCells = 12;
-
-    for (int row = 0; row < grid.rowCount; ++row) {
-      for (int col = 0; col < grid.columnCount; ++col) {
-        CGRect viewFrame = [grid frameOfCellAtRow:row inColumn:col];
-        [_cardViews addObject:[self createCardView:viewFrame]];
-      }
-    }
+    _cardViews = [self createCardViews];
   }
 
   return _cardViews;
@@ -89,6 +77,26 @@
     [self updateUI];
 }
 
+- (NSMutableArray *)createCardViews
+{
+  NSMutableArray *cardViews = [[NSMutableArray alloc] init];
+  Grid* grid = [[Grid alloc] init];
+
+  grid.cellAspectRatio = 0.8;
+  grid.size = self.overallCardsView.bounds.size;
+  grid.minimumNumberOfCells = 12;
+
+  for (int row = 0; row < grid.rowCount; ++row) {
+    for (int col = 0; col < grid.columnCount; ++col) {
+      CGRect viewFrame = [grid frameOfCellAtRow:row inColumn:col];
+      [cardViews addObject:[self createCardView:viewFrame]];
+    }
+  }
+
+  return cardViews;
+}
+
+
 - (CardMatchingGame*) createGame
 {
     return [[CardMatchingGame alloc] initWithCardCount:[self.cardViews count]
@@ -111,6 +119,25 @@
         [cardView setNeedsDisplay];
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", @(self.game.score)];
+
+}
+
+- (void) matchingOccured
+{
+  NSMutableArray* matchedCardViews = [[NSMutableArray alloc] init];
+
+  for (Card* card in self.game.cardsToDisplay) {
+    NSUInteger index = [self.game indexOfCard:card];
+
+    UIView* cardView = self.cardViews[index];
+    [matchedCardViews addObject:cardView];
+  }
+
+  [self removeCards:matchedCardViews];
+}
+
+- (void) removeCards:(NSArray *)cardsToRemove
+{
 }
 
 - (void) tap:(UITapGestureRecognizer *)sender
@@ -121,6 +148,10 @@
   NSUInteger cardIndex = [self.cardViews indexOfObject:cardView];
   [self.game chooseCardAtIndex:cardIndex];
 
+  if (self.game.score > 0) {
+    [self matchingOccured];
+  }
+  
   [self updateUI];
 }
 

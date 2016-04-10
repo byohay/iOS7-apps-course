@@ -75,6 +75,21 @@
   setCardView.isChosen = setCard.isChosen;
 }
 
+- (void)removeCards:(NSArray *)cardsToRemove
+{
+  [UIView animateWithDuration:1.0
+                   animations:^{
+    for (UIView *card in cardsToRemove) {
+      int x = (arc4random()%(int)(self.view.bounds.size.width*5)) - (int)self.view.bounds.size.width*2;
+      int y = self.view.bounds.size.height;
+      card.center = CGPointMake(x, -y);
+    }
+  }
+                   completion:^(BOOL finished) {
+    [cardsToRemove makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    }
+   ];
+}
 
 - (UIView*) createCardView:(CGRect)frame
 {
