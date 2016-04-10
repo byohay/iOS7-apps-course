@@ -27,11 +27,6 @@
     return 2;
 }
 
-- (NSAttributedString*) historyTitleForCard:(Card*) card
-{
-    return [[NSAttributedString alloc] initWithString: card.contents];
-}
-
 - (void) updateCardView:(UIView *) cardView withCard:(Card *)card
 {
     PlayingCard *playingCard = (PlayingCard *)card;

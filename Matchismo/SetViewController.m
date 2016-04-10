@@ -13,8 +13,6 @@
 
 @interface SetViewController()
 
-@property (strong, nonatomic) NSDictionary* stringToUIColor;
-
 @end
 
 @implementation SetViewController
@@ -27,22 +25,6 @@
 - (NSUInteger) getMatchingMode
 {
     return 3;
-}
-
-- (NSDictionary*) stringToUIColor
-{
-    if(!_stringToUIColor) _stringToUIColor = @{
-                                         @"red" : [[UIColor alloc] initWithRed:1 green:0 blue:0 alpha:1],
-                                         @"green" : [[UIColor alloc] initWithRed:0 green:1 blue:0 alpha:1],
-                                         @"blue" : [[UIColor alloc] initWithRed:0 green:0 blue:1 alpha:1]
-                                         };
-    
-    return _stringToUIColor;
-}
-
-- (UIColor*) getStringToUIColor:(NSString*) stringColor
-{
-    return self.stringToUIColor[stringColor];
 }
 
 - (NSString*) getShape:(int) shape

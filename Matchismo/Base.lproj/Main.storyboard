@@ -75,18 +75,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="xqN-AH-2TB"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="zZK-Ic-ahY">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="ZSH-rT-bJp">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NTr-Lq-rn6">
-                                <rect key="frame" x="276" y="7" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="History"/>
-                                <connections>
-                                    <segue destination="PNr-Ah-OeB" kind="show" identifier="Show History" id="6ts-1h-T9d"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="zZK-Ic-ahY"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -107,7 +96,7 @@
                         <viewControllerLayoutGuide type="bottom" id="kz2-iC-qhC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KDw-V8-mb2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JDw-CQ-Yt3">
@@ -181,18 +170,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="o7E-Sj-4Wm"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="xFa-o5-Qre">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="53B-8u-nek">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IXh-Th-WC1">
-                                <rect key="frame" x="276" y="7" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="History"/>
-                                <connections>
-                                    <segue destination="PNr-Ah-OeB" kind="show" identifier="Show History" id="52y-ln-DMg"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="xFa-o5-Qre"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -205,7 +183,4 @@
             <point key="canvasLocation" x="-372.5" y="730.5"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="6ts-1h-T9d"/>
-    </inferredMetricsTieBreakers>
 </document>
