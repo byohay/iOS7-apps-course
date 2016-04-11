@@ -70,14 +70,12 @@
 }
 
 - (IBAction)touchMoreCards:(UIButton*)sender {
-
-  NSUInteger numberOfCardsBeforeAdding = [self.cardViews count];
-  self.cardViews = [self createCardViews:([self.cardViews count] + 3)];
-  NSUInteger numberOfCardsToAdd = [self.cardViews count] - numberOfCardsBeforeAdding;
+  NSUInteger numberOfCardsToAdd = 3;
 
   for (int i = 0; i < numberOfCardsToAdd; ++i) {
-    [self.game addCard:[self.deck drawRandomCard]];
   }
+
+  self.cardViews = [self createCardViews:([self.cardViews count] + numberOfCardsToAdd)];
 
   [self resetOverallCardsView];
   [self updateUI];
@@ -131,11 +129,11 @@
   grid.size = self.overallCardsView.bounds.size;
   grid.minimumNumberOfCells = numberOfCards;
 
-  for (int row = 0; row < grid.rowCount; ++row) {
-    for (int col = 0; col < grid.columnCount; ++col) {
-      CGRect viewFrame = [grid frameOfCellAtRow:row inColumn:col];
-      [cardViews addObject:[self createCardView:viewFrame]];
-    }
+  for (int cardNum = 0; cardNum < numberOfCards; ++cardNum) {
+    NSUInteger rowNum = cardNum / grid.columnCount;
+    NSUInteger colNum = cardNum % grid.columnCount;
+    CGRect viewFrame = [grid frameOfCellAtRow:rowNum inColumn:colNum];
+    [cardViews addObject:[self createCardView:viewFrame]];
   }
 
   return cardViews;
