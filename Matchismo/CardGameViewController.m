@@ -21,7 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *overallCardsView;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSMutableArray *cardViews;
-
+@property (weak, nonatomic) IBOutlet UIButton *moreCardsButton;
 @end
 
 
@@ -73,6 +73,15 @@
   NSUInteger numberOfCardsToAdd = 3;
 
   for (int i = 0; i < numberOfCardsToAdd; ++i) {
+    Card *randomCard = [self.deck drawRandomCard];
+    if (!randomCard) {
+      numberOfCardsToAdd = i;
+      sender.enabled = NO;
+      [sender setTitleColor:[sender.currentTitleColor colorWithAlphaComponent:0.3]
+                   forState:UIControlStateNormal];
+      break;
+    }
+    [self.game addCard:randomCard];
   }
 
   self.cardViews = [self createCardViews:([self.cardViews count] + numberOfCardsToAdd)];
@@ -82,12 +91,18 @@
   [self removeMatchedCardsFromOverall];
 }
 
+static const int numberOfCardsAtStart = 12;
+
 - (IBAction)touchResetButton:(UIButton*)sender {
   self.deck = [self createDeck];
-    self.game = [self createGame];
-    self.cardViews = [self createCardViews];
+  self.game = [self createGame];
+  self.cardViews = [self createCardViews];
   [self resetOverallCardsView];
-    [self updateUI];
+  [self updateUI];
+
+  self.moreCardsButton.enabled = YES;
+  [self.moreCardsButton setTitleColor:[UIColor blackColor]
+                             forState:UIControlStateNormal];
 }
 
 - (void) resetOverallCardsView
@@ -116,7 +131,7 @@
 
 - (NSMutableArray *)createCardViews
 {
-  NSMutableArray *cardViews = [self createCardViews:12];
+  NSMutableArray *cardViews = [self createCardViews:numberOfCardsAtStart];
   return cardViews;
 }
 
@@ -141,7 +156,7 @@
 
 - (CardMatchingGame*) createGame
 {
-    return [[CardMatchingGame alloc] initWithCardCount:[self.cardViews count]
+    return [[CardMatchingGame alloc] initWithCardCount:numberOfCardsAtStart
                                              usingDeck:self.deck
                                  numberOfMatchingCards:[self getMatchingMode]];
 }
