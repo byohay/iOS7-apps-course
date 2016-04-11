@@ -18,6 +18,7 @@
 @property (strong, nonatomic) Deck* deck;
 @property (strong, nonatomic) CardMatchingGame* game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (strong, nonatomic) Grid* grid;
 
 @property (weak, nonatomic) IBOutlet UIView *overallCardsView;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSMutableArray *cardViews;
@@ -53,6 +54,17 @@
   }
 
   return _cardViews;
+}
+
+- (Grid*)grid
+{
+  if (!_grid) {
+    _grid = [[Grid alloc] init];
+    _grid.cellAspectRatio = 0.8;
+    _grid.size = self.overallCardsView.bounds.size;
+  }
+
+  return _grid;
 }
 
 
@@ -136,21 +148,29 @@ static const int numberOfCardsAtStart = 12;
   [self.overallCardsView setNeedsDisplay];
 }
 
+- (CGRect) getCardFrame:(NSUInteger)cardNum
+{
+  NSUInteger rowNum = cardNum / self.grid.columnCount;
+  NSUInteger colNum = cardNum % self.grid.columnCount;
+  CGRect viewFrame = [self.grid frameOfCellAtRow:rowNum inColumn:colNum];
+
+  return viewFrame;
+}
+
+- (UIView *)getNewCardView:(NSUInteger)cardNum
+{
+  return [self createCardView:[self getCardFrame:cardNum]];
+}
+
 
 - (NSMutableArray *)createCardViews
 {
   NSMutableArray *cardViews = [[NSMutableArray alloc] init];
-  Grid* grid = [[Grid alloc] init];
 
-  grid.cellAspectRatio = 0.8;
-  grid.size = self.overallCardsView.bounds.size;
-  grid.minimumNumberOfCells = numberOfCardsAtStart;
+  self.grid.minimumNumberOfCells = numberOfCardsAtStart;
 
   for (int cardNum = 0; cardNum < numberOfCardsAtStart; ++cardNum) {
-    NSUInteger rowNum = cardNum / grid.columnCount;
-    NSUInteger colNum = cardNum % grid.columnCount;
-    CGRect viewFrame = [grid frameOfCellAtRow:rowNum inColumn:colNum];
-    [cardViews addObject:[self createCardView:viewFrame]];
+    [cardViews addObject:[self getNewCardView:cardNum]];
   }
 
   return cardViews;
@@ -159,25 +179,17 @@ static const int numberOfCardsAtStart = 12;
 - (void) addMoreCards:(NSUInteger)numberOfCardsToAdd
 {
   NSUInteger numberOfCards = [self.cardViews count] + numberOfCardsToAdd;
-  Grid* grid = [[Grid alloc] init];
 
-  grid.cellAspectRatio = 0.8;
-  grid.size = self.overallCardsView.bounds.size;
-  grid.minimumNumberOfCells = numberOfCards;
+  self.grid.minimumNumberOfCells = numberOfCards;
 
   for (int cardNum = 0; cardNum < [self.cardViews count]; ++cardNum) {
-    NSUInteger rowNum = cardNum / grid.columnCount;
-    NSUInteger colNum = cardNum % grid.columnCount;
-    CGRect viewFrame = [grid frameOfCellAtRow:rowNum inColumn:colNum];
+    CGRect viewFrame = [self getCardFrame:cardNum];
     UIView* cardView = self.cardViews[cardNum];
     [cardView setFrame:viewFrame];
   }
 
   for (NSUInteger cardNum = [self.cardViews count]; cardNum < numberOfCards; ++cardNum) {
-    NSUInteger rowNum = cardNum / grid.columnCount;
-    NSUInteger colNum = cardNum % grid.columnCount;
-    CGRect viewFrame = [grid frameOfCellAtRow:rowNum inColumn:colNum];
-    [self.cardViews addObject:[self createCardView:viewFrame]];
+    [self.cardViews addObject:[self getNewCardView:cardNum]];
   }
 
   [self addCardsToOverview:numberOfCardsToAdd];
