@@ -180,22 +180,9 @@ static const int numberOfCardsAtStart = 12;
   self.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", @(self.game.score)];
 }
 
-- (void) removeMatchedCards
+- (BOOL) isTapOnACard:(UIView *)viewTappedOn
 {
-  NSMutableArray* matchedCardViews = [[NSMutableArray alloc] init];
-
-  for (CardView* cardView in self.overallCardsView.subviews) {
-    if (cardView.isMatched) {
-      [matchedCardViews addObject:cardView];
-    }
-  }
-
-  [self removeCards:matchedCardViews];
-  [self.overallCardsView setNeedsDisplay];
-}
-
-- (void) removeCards:(NSArray *)cardsToRemove
-{
+  return viewTappedOn != self.overallCardsView;
 }
 
 - (void) tap:(UITapGestureRecognizer *)sender
@@ -203,7 +190,7 @@ static const int numberOfCardsAtStart = 12;
   CGPoint tapPoint = [sender locationInView:self.overallCardsView];
   UIView* cardView = [self.overallCardsView hitTest:tapPoint withEvent:nil];
 
-  if (cardView == self.overallCardsView) {
+  if (![self isTapOnACard:cardView]) {
     return;
   }
 
@@ -211,7 +198,8 @@ static const int numberOfCardsAtStart = 12;
   [self.game chooseCardAtIndex:cardIndex];
   [self updateUI];
 
-  [self removeMatchedCards];
+  [self handleTapInSpecificController:self.overallCardsView
+                            tappedCard:cardView];
 }
 
 @end

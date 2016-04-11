@@ -75,7 +75,7 @@
   setCardView.isChosen = setCard.isChosen;
 }
 
-- (void)removeCards:(NSArray *)cardsToRemove
+- (void)removeMatchedCards:(NSArray *)cardsToRemove
 {
   [UIView animateWithDuration:1.0
                    animations:^{
@@ -89,6 +89,21 @@
     [cardsToRemove makeObjectsPerformSelector:@selector(removeFromSuperview)];
     }
    ];
+}
+
+- (void)handleTapInSpecificController:(UIView *)overallCardsView
+                                    tappedCard:(UIView *)cardView
+{
+  NSMutableArray* matchedCardViews = [[NSMutableArray alloc] init];
+
+  for (CardView* cardView in overallCardsView.subviews) {
+    if (cardView.isMatched) {
+      [matchedCardViews addObject:cardView];
+    }
+  }
+
+  [self removeMatchedCards:matchedCardViews];
+  [overallCardsView setNeedsDisplay];
 }
 
 - (UIView*) createCardView:(CGRect)frame
