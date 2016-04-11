@@ -77,8 +77,8 @@
     if (!randomCard) {
       numberOfCardsToAdd = i;
       sender.enabled = NO;
-      [sender setTitleColor:[sender.currentTitleColor colorWithAlphaComponent:0.3]
-                   forState:UIControlStateNormal];
+      [self.moreCardsButton setBackgroundImage:[UIImage imageNamed:@"cardfront"]
+                                      forState:UIControlStateNormal];
       break;
     }
     [self.game addCard:randomCard];
@@ -101,8 +101,8 @@ static const int numberOfCardsAtStart = 12;
   [self updateUI];
 
   self.moreCardsButton.enabled = YES;
-  [self.moreCardsButton setTitleColor:[UIColor blackColor]
-                             forState:UIControlStateNormal];
+  [self.moreCardsButton setBackgroundImage:[UIImage imageNamed:@"cardback"]
+                                  forState:UIControlStateNormal];
 }
 
 - (void) resetOverallCardsView
