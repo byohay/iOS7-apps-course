@@ -45,6 +45,14 @@
   [self updateUI];
 }
 
+- (void) viewDidLayoutSubviews
+{
+  if (self.grid.size.width != self.overallCardsView.bounds.size.width
+      || self.grid.size.height != self.overallCardsView.bounds.size.height) {
+    self.grid.size = self.overallCardsView.bounds.size;
+    [self updateOverallCardsView];
+  }
+}
 
 - (NSMutableArray*)cardViews
 {
