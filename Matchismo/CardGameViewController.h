@@ -17,7 +17,7 @@
 - (NSUInteger) getMatchingMode; // abstract
 - (void) updateCardView:(UIView *) cardView withCard:(Card *)card; // abstract
 - (UIView*) createCardView:(CGRect)frame; // abstract
-- (void)handleTapInSpecificController:(UIView *)overallCardsView
-                               tappedCard:(UIView *)cardView; // abstract
+- (void)handleTapInSpecificController:(UIView *)cardView;
 
+- (void)removeMatchedCards;
 @end

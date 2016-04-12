@@ -187,15 +187,25 @@ static const int numberOfCardsAtStart = 12;
 
 - (void) updateUI
 {
+  BOOL isUpdatingOverallView = YES;
+
   for (CardView* cardView in self.cardViews) {
     NSUInteger cardIndex = [self.cardViews indexOfObject:cardView];
 
     Card* card = [self.game cardAtIndex:cardIndex];
     [self updateCardView:cardView withCard:card];
+
+    if (cardView.isMatched != card.isMatched) {
+      isUpdatingOverallView = NO;
+    }
+
     cardView.isMatched = card.isMatched;
     [cardView setNeedsDisplay];
   }
-  [self updateOverallCardsView];
+
+  if (isUpdatingOverallView) {
+    [self updateOverallCardsView];
+  }
   self.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", @(self.game.score)];
 }
 
@@ -217,8 +227,43 @@ static const int numberOfCardsAtStart = 12;
   [self.game chooseCardAtIndex:cardIndex];
   [self updateUI];
 
-  [self handleTapInSpecificController:self.overallCardsView
-                            tappedCard:cardView];
+  [self handleTapInSpecificController:cardView];
+  [self removeMatchedCards];
 }
+
+- (void) handleTapInSpecificController:(UIView *)cardView
+{
+}
+
+
+- (void)removeMatchedCards
+{
+  NSMutableArray* matchedCardViews = [[NSMutableArray alloc] init];
+
+  for (CardView* cardView in self.overallCardsView.subviews) {
+    if (cardView.isMatched) {
+      [matchedCardViews addObject:cardView];
+    }
+  }
+  
+  [self animateMatchedCardsRemoval:matchedCardViews];
+}
+
+- (void)animateMatchedCardsRemoval:(NSArray *)cardsToRemove
+{
+  [UIView animateWithDuration:1.0
+                   animations:^{
+                     for (UIView *card in cardsToRemove) {
+                       int x = (arc4random()%(int)(self.view.bounds.size.width*5)) - (int)self.view.bounds.size.width*2;
+                       int y = self.view.bounds.size.height;
+                       card.center = CGPointMake(x, -y);
+                     }
+                   }
+                   completion:^(BOOL finished) {
+                     [self updateOverallCardsView];
+                   }
+   ];
+}
+
 
 @end

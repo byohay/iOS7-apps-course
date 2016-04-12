@@ -42,11 +42,13 @@
   return [[PlayingCardView alloc] initWithFrame:viewFrame];
 }
 
-- (void)handleTapInSpecificController:(UIView *)overallCardsView
-                           tappedCard:(UIView *)cardView
+- (void)handleTapInSpecificController:(UIView *)cardView
 {
-  [UIView transitionWithView:cardView duration:0.5 options:UIViewAnimationOptionTransitionFlipFromLeft
-                  animations:^{} completion:^(BOOL fin){}];
+  [UIView transitionWithView:cardView
+                    duration:0.5
+                     options:UIViewAnimationOptionTransitionFlipFromLeft
+                  animations:^{}
+                  completion:^(BOOL fin){}];
 }
 
 @end
