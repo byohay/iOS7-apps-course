@@ -255,9 +255,10 @@ static const int numberOfCardsAtStart = 12;
   self.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", @(self.game.score)];
 }
 
-- (BOOL) isTapOnACard:(UIView *)viewTappedOn
+- (BOOL) isTapOnSubview:(UIView *)viewTappedOn
+                 withView:(UIView *)superview
 {
-  return viewTappedOn != self.overallCardsView;
+  return viewTappedOn != superview;
 }
 
 - (void) tap:(UITapGestureRecognizer *)sender
@@ -265,7 +266,7 @@ static const int numberOfCardsAtStart = 12;
   CGPoint tapPoint = [sender locationInView:self.overallCardsView];
   UIView* cardView = [self.overallCardsView hitTest:tapPoint withEvent:nil];
 
-  if (![self isTapOnACard:cardView]) {
+  if (![self isTapOnSubview:cardView withView:self.overallCardsView]) {
     return;
   }
 
@@ -316,6 +317,31 @@ static const int numberOfCardsAtStart = 12;
                      [self updateOverallCardsView];
                    }
    ];
+}
+
+- (void) pan:(UIPanGestureRecognizer *)sender
+{
+  if (!self.isStacked) {
+    return;
+  }
+
+  CGPoint panPoint = [sender locationInView:self.view];
+  UIView* cardView = [self.view hitTest:panPoint withEvent:nil];
+
+  if (![self isTapOnSubview:cardView withView:self.view]) {
+    return;
+  }
+
+  if (sender.state == UIGestureRecognizerStateChanged)
+  {
+    for (UISnapBehavior *snap in self.animator.behaviors) {
+      CGPoint newSnapPoint;
+      newSnapPoint.x = [sender locationInView:self.overallCardsView].x;
+      newSnapPoint.y = [sender locationInView:self.overallCardsView].y;
+
+      snap.snapPoint = newSnapPoint;
+    }
+  }
 }
 
 - (void) pinch:(UIPinchGestureRecognizer *)sender
