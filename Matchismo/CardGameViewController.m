@@ -20,9 +20,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) Grid* grid;
 
+@property (strong, nonatomic) UIDynamicAnimator *animator;
+@property (nonatomic) BOOL isStacked;
+
 @property (weak, nonatomic) IBOutlet UIView *overallCardsView;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSMutableArray *cardViews;
 @property (weak, nonatomic) IBOutlet UIButton *moreCardsButton;
+
+
 @end
 
 
@@ -36,6 +41,11 @@
 
   [self.overallCardsView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:
    self action:@selector(tap:)]];
+
+  [self.overallCardsView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:
+                                               self action:@selector(pinch:)]];
+
+  self.isStacked = NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -52,6 +62,16 @@
     self.grid.size = self.overallCardsView.bounds.size;
     [self updateOverallCardsView];
   }
+}
+
+- (UIDynamicAnimator *)animator
+{
+  if (!_animator)
+  {
+    _animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.overallCardsView];
+  }
+
+  return _animator;
 }
 
 - (NSMutableArray*)cardViews
@@ -119,6 +139,8 @@ static const int numberOfCardsAtStart = 12;
   self.moreCardsButton.enabled = YES;
   [self.moreCardsButton setBackgroundImage:[UIImage imageNamed:@"cardback"]
                                   forState:UIControlStateNormal];
+
+  self.isStacked = NO;
 }
 
 - (BOOL) areRectsEqual:(CGRect)rect1 withRect:(CGRect)rect2
@@ -243,6 +265,13 @@ static const int numberOfCardsAtStart = 12;
     return;
   }
 
+  if (self.isStacked) {
+    self.isStacked = NO;
+    [self updateUI];
+    [self.animator removeAllBehaviors];
+    return;
+  }
+
   NSUInteger cardIndex = [self.cardViews indexOfObject:cardView];
   [self.game chooseCardAtIndex:cardIndex];
   [self updateUI];
@@ -283,6 +312,25 @@ static const int numberOfCardsAtStart = 12;
                      [self updateOverallCardsView];
                    }
    ];
+}
+
+- (void) pinch:(UIPinchGestureRecognizer *)sender
+{
+  sender.scale = 1;
+  if (self.isStacked) {
+    return;
+  }
+
+  self.isStacked = YES;
+
+  CGPoint pinchCenter = [sender locationInView:self.overallCardsView];
+
+  for (CardView *card in self.overallCardsView.subviews) {
+    UISnapBehavior *snap = [[UISnapBehavior alloc] initWithItem:card
+                                                          snapToPoint:pinchCenter];
+
+    [self.animator addBehavior:snap];
+  }
 }
 
 
