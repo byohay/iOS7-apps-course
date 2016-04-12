@@ -22,6 +22,7 @@
 
 @property (strong, nonatomic) UIDynamicAnimator *animator;
 @property (nonatomic) BOOL isStacked;
+@property (nonatomic) BOOL isBeginMoving;
 
 @property (weak, nonatomic) IBOutlet UIView *overallCardsView;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSMutableArray *cardViews;
@@ -331,11 +332,16 @@ static const int numberOfCardsAtStart = 12;
   CGPoint panPoint = [sender locationInView:self.view];
   UIView* cardView = [self.view hitTest:panPoint withEvent:nil];
 
-  if (![self isTapOnSubview:cardView withView:self.view]) {
+  if ((![self isTapOnSubview:cardView withView:self.view] ||
+      ![self isTapOnSubview:cardView withView:self.overallCardsView]) &&
+      !self.isBeginMoving) {
     return;
   }
 
-  if (sender.state == UIGestureRecognizerStateChanged)
+  if (sender.state == UIGestureRecognizerStateBegan) {
+    self.isBeginMoving = YES;
+  }
+  else if (sender.state == UIGestureRecognizerStateChanged)
   {
     for (UISnapBehavior *snap in self.animator.behaviors) {
       CGPoint newSnapPoint;
@@ -344,6 +350,9 @@ static const int numberOfCardsAtStart = 12;
 
       snap.snapPoint = newSnapPoint;
     }
+  }
+  else if (sender.state == UIGestureRecognizerStateEnded) {
+    self.isBeginMoving = NO;
   }
 }
 
