@@ -132,7 +132,7 @@ static const int numberOfCardsAtStart = 12;
     if (!view.isMatched) {
       CGRect cardFrame = [self getCardFrame:cardNum];
       if (![self areRectsEqual:view.frame withRect:cardFrame]) {
-        [view setFrame:cardFrame];
+        [self animateMoveCard:view withFrame:cardFrame];
       }
       cardNum++;
       [self.overallCardsView addSubview:view];
@@ -140,6 +140,18 @@ static const int numberOfCardsAtStart = 12;
   }
 
   [self.overallCardsView setNeedsDisplay];
+}
+
+- (void) animateMoveCard:(CardView *)cardView
+               withFrame:(CGRect)frame
+{
+  [UIView animateWithDuration:0.5
+                   animations:^{
+                     [cardView setFrame:frame];
+                   }
+                   completion:^(BOOL finished) {
+                   }
+   ];
 }
 
 - (CGRect) getCardFrame:(NSUInteger)cardNum
