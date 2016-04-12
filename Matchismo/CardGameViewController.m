@@ -39,11 +39,13 @@
 
   [self updateUI];
 
-  [self.overallCardsView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:
+  [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:
    self action:@selector(tap:)]];
 
-  [self.overallCardsView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:
+  [self.view addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:
                                                self action:@selector(pinch:)]];
+  [self.view addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:
+                                               self action:@selector(pan:)]];
 
   self.isStacked = NO;
 }
@@ -52,7 +54,9 @@
 {
   [super viewWillAppear:animated];
 
-  [self updateUI];
+  if (!self.isStacked) {
+    [self updateUI];
+  }
 }
 
 - (void) viewDidLayoutSubviews
