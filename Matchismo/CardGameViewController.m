@@ -32,7 +32,7 @@
 {
   [super viewDidLoad];
 
-  [self resetOverallCardsView];
+  [self updateUI];
 
   [self.overallCardsView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:
    self action:@selector(tap:)]];
@@ -106,7 +106,6 @@ static const int numberOfCardsAtStart = 12;
   self.deck = [self createDeck];
   self.game = [self createGame];
   self.cardViews = [self createCardViews];
-  [self resetOverallCardsView];
   [self updateUI];
 
   self.moreCardsButton.enabled = YES;
@@ -114,37 +113,32 @@ static const int numberOfCardsAtStart = 12;
                                   forState:UIControlStateNormal];
 }
 
-- (void) addCardsToOverview:(NSUInteger) numberOfCardsToAdd
+- (BOOL) areRectsEqual:(CGRect)rect1 withRect:(CGRect)rect2
 {
-  for (NSUInteger i = [self.cardViews count] - numberOfCardsToAdd; i < [self.cardViews count]; ++i) {
-    UIView* cardView = self.cardViews[i];
-    [self.overallCardsView addSubview:cardView];
-  }
-
-  [self.overallCardsView setNeedsDisplay];
+  return rect1.origin.x == rect2.origin.x &&
+  rect1.origin.y == rect2.origin.y &&
+  rect1.size.height == rect2.size.height &&
+  rect1.size.width == rect2.size.width;
 }
 
-
-- (void) resetOverallCardsView
+- (void) updateOverallCardsView
 {
   [[self.overallCardsView subviews]
    makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
+  NSUInteger cardNum = 0;
+
   for (CardView* view in self.cardViews) {
     if (!view.isMatched) {
+      CGRect cardFrame = [self getCardFrame:cardNum];
+      if (![self areRectsEqual:view.frame withRect:cardFrame]) {
+        [view setFrame:cardFrame];
+      }
+      cardNum++;
       [self.overallCardsView addSubview:view];
      }
   }
-  [self.overallCardsView setNeedsDisplay];
-}
 
-- (void) removeMatchedCardsFromOverall
-{
-  for (CardView* view in self.overallCardsView.subviews) {
-    if (view.isMatched) {
-      [view removeFromSuperview];
-    }
-  }
   [self.overallCardsView setNeedsDisplay];
 }
 
@@ -157,12 +151,6 @@ static const int numberOfCardsAtStart = 12;
   return viewFrame;
 }
 
-- (UIView *)getNewCardView:(NSUInteger)cardNum
-{
-  return [self createCardView:[self getCardFrame:cardNum]];
-}
-
-
 - (NSMutableArray *)createCardViews
 {
   NSMutableArray *cardViews = [[NSMutableArray alloc] init];
@@ -170,7 +158,7 @@ static const int numberOfCardsAtStart = 12;
   self.grid.minimumNumberOfCells = numberOfCardsAtStart;
 
   for (int cardNum = 0; cardNum < numberOfCardsAtStart; ++cardNum) {
-    [cardViews addObject:[self getNewCardView:cardNum]];
+    [cardViews addObject:[self createCardView:CGRectMake(0, 0, 0, 0)]];
   }
 
   return cardViews;
@@ -178,21 +166,11 @@ static const int numberOfCardsAtStart = 12;
 
 - (void) addMoreCards:(NSUInteger)numberOfCardsToAdd
 {
-  NSUInteger numberOfCards = [self.cardViews count] + numberOfCardsToAdd;
+  self.grid.minimumNumberOfCells = [self.cardViews count] + numberOfCardsToAdd;
 
-  self.grid.minimumNumberOfCells = numberOfCards;
-
-  for (int cardNum = 0; cardNum < [self.cardViews count]; ++cardNum) {
-    CGRect viewFrame = [self getCardFrame:cardNum];
-    UIView* cardView = self.cardViews[cardNum];
-    [cardView setFrame:viewFrame];
+  for (NSUInteger cardNum = 0; cardNum < numberOfCardsToAdd; ++cardNum) {
+    [self.cardViews addObject:[self createCardView:CGRectMake(0, 0, 0, 0)]];
   }
-
-  for (NSUInteger cardNum = [self.cardViews count]; cardNum < numberOfCards; ++cardNum) {
-    [self.cardViews addObject:[self getNewCardView:cardNum]];
-  }
-
-  [self addCardsToOverview:numberOfCardsToAdd];
 }
 
 - (CardMatchingGame*) createGame
@@ -209,15 +187,15 @@ static const int numberOfCardsAtStart = 12;
 
 - (void) updateUI
 {
-    for (CardView* cardView in self.overallCardsView.subviews) {
-        NSUInteger cardIndex = [self.cardViews indexOfObject:cardView];
-        
-        Card* card = [self.game cardAtIndex:cardIndex];
-        [self updateCardView:cardView withCard:card];
-        cardView.isMatched = card.isMatched;
-        [cardView setNeedsDisplay];
-    }
+  for (CardView* cardView in self.cardViews) {
+    NSUInteger cardIndex = [self.cardViews indexOfObject:cardView];
 
+    Card* card = [self.game cardAtIndex:cardIndex];
+    [self updateCardView:cardView withCard:card];
+    cardView.isMatched = card.isMatched;
+    [cardView setNeedsDisplay];
+  }
+  [self updateOverallCardsView];
   self.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", @(self.game.score)];
 }
 
