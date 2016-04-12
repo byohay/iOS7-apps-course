@@ -129,7 +129,10 @@
   }
 
   [self addMoreCards:numberOfCardsToAdd];
-  [self updateUI];
+
+  if (!self.isStacked) {
+    [self updateUI];
+  }
 }
 
 static const int numberOfCardsAtStart = 12;
