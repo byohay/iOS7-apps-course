@@ -285,16 +285,17 @@ static const int numberOfCardsAtStart = 12;
   [self.game chooseCardAtIndex:cardIndex];
   [self updateUI];
 
-  [self handleTapInSpecificController:cardView];
-  [self removeMatchedCards];
+  double delayForNextAnimation = [self handleTapInSpecificController:cardView];
+  [self removeMatchedCards:delayForNextAnimation];
 }
 
-- (void) handleTapInSpecificController:(UIView *)cardView
+- (double) handleTapInSpecificController:(UIView *)cardView
 {
+  return 0;
 }
 
 
-- (void)removeMatchedCards
+- (void)removeMatchedCards:(double)delay
 {
   NSMutableArray* matchedCardViews = [[NSMutableArray alloc] init];
 
@@ -304,12 +305,15 @@ static const int numberOfCardsAtStart = 12;
     }
   }
   
-  [self animateMatchedCardsRemoval:matchedCardViews];
+  [self animateMatchedCardsRemoval:matchedCardViews startIn:delay];
 }
 
 - (void)animateMatchedCardsRemoval:(NSArray *)cardsToRemove
+                           startIn:(double)delay
 {
   [UIView animateWithDuration:1.0
+                       delay:delay
+                      options:UIViewAnimationOptionBeginFromCurrentState
                    animations:^{
                      for (UIView *card in cardsToRemove) {
                        int x = (arc4random()%(int)(self.view.bounds.size.width*5)) - (int)self.view.bounds.size.width*2;
